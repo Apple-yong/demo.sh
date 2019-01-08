@@ -1,0 +1,64 @@
+html,body{
+    padding: 0;
+    margin: 0;
+    background-color: black;
+    color: white;
+}
+a{
+    text-decoration: none;
+    color: inherit;
+}
+/* slightly enhanced, universal clearfix hack */
+.clearfix:after {
+    visibility: hidden;
+    display: block;
+    font-size: 0;
+    content: " ";
+    clear: both;
+    height: 0;
+}
+.clearfix { display: inline-block; }
+/* start commented backslash hack \*/
+* html .clearfix { height: 1%; }
+.clearfix { display: block; }
+/* close commented backslash hack */
+
+.topNavBar{
+    padding: 20px 16px 24px 16px;
+}
+.topNavBar .logo{
+    font-size: 24px;
+    font-family: 'Arial Black';
+    float: left;
+    padding-top: 3px;
+    padding-bottom: 4px;
+}
+.topNavBar .logo .rs{
+    color: rgb(230, 104, 106)
+}
+.topNavBar .logo .card{
+    color: rgb(154, 157, 162);
+    margin-left: 4px;
+}
+.topNavBar nav{
+    float: right;
+    margin-top: 3px;
+    font-size: 12px;
+}
+.topNavBar nav ul{
+    list-style: none;
+}
+.topNavBar nav ul>li{
+    float: left;
+    margin-left: 17px;
+    margin-right: 17px;
+}
+.topNavBar nav ul>li>a{
+    padding-top: 10px;
+    font-weight: bold;
+    padding-bottom: 4px;
+    color: #b7b7b7;
+}
+.topNavBar nav ul>li>a:hover{
+    border-bottom: 3px solid #e06567;
+}
