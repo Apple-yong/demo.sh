@@ -1,8 +1,10 @@
 html,body{
+    background-color: #efefef;
+    color: black;
+}
+*{
     padding: 0;
     margin: 0;
-    background-color: black;
-    color: white;
 }
 a{
     text-decoration: none;
@@ -23,8 +25,15 @@ a{
 .clearfix { display: block; }
 /* close commented backslash hack */
 
+
+/*导航栏*/
 .topNavBar{
-    padding: 20px 16px 24px 16px;
+    position: fixed;
+    width: 100%;
+    padding: 20px 0 24px 0;
+}
+.topNavBar-inner{
+    padding: 0 16px;
 }
 .topNavBar .logo{
     font-size: 24px;
@@ -61,4 +70,51 @@ a{
 }
 .topNavBar nav ul>li>a:hover{
     border-bottom: 3px solid #e06567;
+}
+
+
+/*banner图*/
+.banner{
+    height: 515px;
+    background-image: url(../img/rs-cover.jpg);
+    background-position: center center;
+    background-size: cover;
+}
+.banner .mask{
+    background-color: rgba(0, 0, 0, 0.8);
+    height: 515px;
+}
+
+/*简历框*/
+.userCard{
+    max-width: 940px;
+    margin: 0 auto;
+    background-color: white;
+}
+.pictureAndText{
+    padding: 50px;
+}
+.pictureAndText .picture{
+    float: left;
+}
+.pictureAndText .text{
+    float: left;
+    width: 470px;
+    margin-left: 65px;
+}
+.userCard hr{
+    margin: 20px 0;
+}
+.userCard dl dt,.userCard dl dd{
+    float: left;
+}
+.userCard dl dt{
+    width: 30%;
+    font-weight: bold;
+    padding: 5px 0;
+}
+.userCard dl dd{
+    width: 70%;
+    color: #9da0a7;
+    padding: 5px 0;
 }
