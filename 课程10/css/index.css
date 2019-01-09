@@ -116,8 +116,8 @@ a{
     position: relative;
     margin-bottom: 10px;
 }
-.userCard .welcome .triangle{
-    display: block;
+.userCard .pictureAndText .text .welcome::after{
+    content: "";
     border: 10px solid transparent;
     border-top-width: 0px;
     border-left-color: #e6686a;
@@ -125,6 +125,17 @@ a{
     top: 100%;
     left: 4px;
 }
+
+/*用伪元素少一个div*/
+/* .userCard .welcome .triangle{
+    display: block;
+    border: 10px solid transparent;
+    border-top-width: 0px;
+    border-left-color: #e6686a;
+    position: absolute;
+    top: 100%;
+    left: 4px;
+} */
 .userCard .text .profile h1{
     margin-top: 18px;
 }
