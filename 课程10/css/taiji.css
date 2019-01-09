@@ -1,0 +1,30 @@
+.taiji{
+    width: 48px;
+    height: 96px;
+    border-color: black;
+    border-radius: 100%;
+    border-width: 2px 50px 2px 2px;
+    border-style: solid;
+    position: relative;
+}
+.taiji:before{
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 100%;
+    border: 17px solid black;
+    background: #eee;
+    top: 50%;
+    left: 50%;
+}
+.taiji:after{
+    content: "";
+    position: absolute;
+    width: 14px;
+    height: 14px;
+    border-radius: 100%;
+    border: 17px solid white;
+    background: black;
+    left: 50%;
+}
