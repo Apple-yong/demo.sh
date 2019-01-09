@@ -6,6 +6,7 @@
     border-width: 2px 50px 2px 2px;
     border-style: solid;
     position: relative;
+    animation:rotating 3s linear infinite
 }
 .taiji:before{
     content: "";
@@ -27,4 +28,8 @@
     border: 17px solid white;
     background: black;
     left: 50%;
+}
+@keyframes rotating{
+    from{transform:rotate(0)}
+    to{transform:rotate(360deg)}
 }
