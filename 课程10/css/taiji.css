@@ -33,3 +33,7 @@
     from{transform:rotate(0)}
     to{transform:rotate(360deg)}
 }
+@-webkit-keyframes rotating{ /*Safari and Chrome*/
+    from{transform:rotate(0)}
+    to{transform:rotate(360deg)}
+} 
