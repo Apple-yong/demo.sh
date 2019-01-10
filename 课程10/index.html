@@ -73,43 +73,76 @@
             </svg></a>
         </footer>
       </div>
-
-      <a class="button" href="#">下载 PDF 简历</a>
-
-      <p>
+      <p class="downloadResumeP">
+        <a class="downloadResume" href="#">下载 PDF 简历</a>
+      </p>
+      <p class="abstract">
         方应杭， 资深前端工程师，资深前端讲师，现在在 饥人谷 教前端课程。<br>
         技能：前端开发，Rails 开发，Node.js 开发
       </p>
 
     </main>
-    <section>
+    <section class="skill">
       <h2>技能</h2>
-      <ol>
-        <li>HTML 5 &amp; CSS 3</li>
-        <li>JavaScript</li>
-        <li>jQuery</li>
-        <li>Vue</li>
-        <li>React</li>
-        <li>HTTP</li>
+      <ol class="clearfix">
+        <li>HTML 5 &amp; CSS 3
+          <div class="progressBar">
+            <div class="progress" style="width: 10%;"></div>
+          </div>
+        </li>
+        <li>JavaScript
+          <div class="progressBar">
+            <div class="progress" style="width: 30%;"></div>
+          </div>
+        </li>
+        <li>jQuery
+          <div class="progressBar">
+            <div class="progress" style="width: 40%;"></div>
+          </div>
+        </li>
+        <li>Vue
+          <div class="progressBar">
+            <div class="progress" style="width: 50%;"></div>
+          </div>
+        </li>
+        <li>React
+          <div class="progressBar">
+            <div class="progress" style="width: 40%;"></div>
+          </div>
+        </li>
+        <li>HTTP
+          <div class="progressBar">
+            <div class="progress" style="width: 70%;"></div>
+          </div>
+        </li>
       </ol>
     </section>
-    <section>
+    <section class="portfolio">
       <h2>作品集</h2>
       <nav>
-        <ol>
-          <li>所有</li>
-          <li>框架</li>
-          <li>原生JS&amp;CSS</li>
+        <ol class="clearfix">
+          <li id="portfolio1">所有</li>
+          <li id="portfolio2">框架</li>
+          <li id="portfolio3">原生JS&amp;CSS</li>
         </ol>
+        <div id="portfolioBar" class="bar state-1">
+          <div class="bar-inner"></div>
+        </div>
       </nav>
 
       <div class="jobs">
-        <div class="big"></div>
-        <div class="small"></div>
-        <div class="small"></div>
+        <div class="big">
+          <img src="img/portfolio1.jpg" alt="">
+        </div>
+        <div class="small smallTop">
+          <img src="img/portfolio2.jpg" alt="">
+        </div>
+        <div class="small smallBot">
+          <img src="img/portfolio3.jpg" alt="">
+        </div>
       </div>
 
     </section>
   </body>
 </html>
-
+<script src="js/index.js"></script>
