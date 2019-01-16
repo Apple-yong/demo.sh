@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body>
+    
+</body>
+</html>
+<script>
+    // 冒泡排序，相邻两个一直比较，最后一个数最大就不用比较了
+    function Bubbling(a){
+        for(var i=0; i<a.length-1; i++){
+            for(var j=0; j<a.length-1; j++){
+                if(a[j] > a[j+1]){
+                    var t = a[j];
+                    a[j] = a[j+1];
+                    a[j+1] = t;
+                }
+            }
+        }
+    }
+
+    // 选择排序，先找全部数中最小的，排第一，再找剩下最小的与之交换
+    function Choice(a){
+        var min, t;
+        for(var i=0; i<a.length-1; i++){
+            min = i;
+            for(var j = i+1; j<a.length; j++){
+                if(a[j] < a[min]){
+                    min = j;
+                } 
+            }
+            t = a[i];
+            a[i] = a[min];
+            a[min] = t
+        }
+    }
+
+
+    // 计数排序
+    function Count(a){
+        //统计每个数有多少个
+        var C = []
+        for(var i = 0; i < a.length; i++) {
+            var j = a[i]
+            //C[j] >= 1 ? C[j] ++ : (C[j] = 1)
+            if(C[j] >= 1){
+                C[j] ++
+            }else{
+                C[j] = 1
+            }
+        }
+        var D = []
+        //j就是数字，判断C[j]是不是0，不是0就写入数组D
+        for(var j = 0; j < C.length; j++) {
+            if(C[j]) {
+                D.push(j)
+                C[j]-- 
+            }
+        }
+        return D
+    }
+    var a = [43,65,76,12,2,31,0,11,333,21,86,21,43,21,5345,231];
+    console.log('排序后：' + Count(a))
+    
+</script>

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>导航</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="css/style.css" />
+    <!-- <script src="main.js"></script> -->
+</head>
+<body>
+    <header></header>
+    <main>
+        <div class="wrapper" id="keyboard"></div>
+    </main>
+    <footer></footer>
+    <script>
+        keys = {
+            '0' : {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+            '1' : {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
+            '2' : {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
+            'length' : 3
+        }
+        website = {
+            'q': 'qq.com', 
+            'w': 'weibo.com', 
+            'e': 'ele.me', 
+            'r': 'renren.com', 
+            't': 'tianya.com', 
+            'y': 'youtube.com', 
+            'u': 'uc.com' , 
+            'i': 'iqiyi.com', 
+            'o': 'opera.com', 
+            'p': undefined, 
+            'a': 'acfun.tv', 
+            's': 'sohu.com', 
+            'z': 'zhihu.com', 
+            'm': 'www.mcdonalds.com.cn'
+		}
+        // 取出localStorage中localwebsite对应的hash
+        hashInlocalStorage = JSON.parse(localStorage.getItem('localwebsite') || 'null')
+        if(hashInlocalStorage){
+            website = hashInlocalStorage
+        }
+        // 将所有数按三排打印出来
+        for(i=0;i<keys.length;i++){
+            x = document.createElement("div")
+            keyboard.appendChild(x) //将节点插入到父节点里的末端
+            for(j=0;j<keys[i]['length'];j++){
+                kbd = document.createElement("kbd")
+                kbd.textContent = keys[i][j]
+                x.appendChild(kbd)
+
+                Ebutton = document.createElement("div")
+                Ebutton.textContent = 'E'
+                Ebutton.id = keys[i][j]
+                Ebutton.setAttribute('title', '修改');
+                kbd.appendChild(Ebutton)
+                Ebutton.onclick = function (param) {
+                    key = param['target']['id'] //获取button的id值,target用户点击的元素
+                    x = prompt('请输入网址：') //js一个弹出文本输入方法
+                    website[key] = x  //将输入的值写入hash
+                    localStorage.setItem('localwebsite',JSON.stringify(website)) //存入localStorage本地存储，不走JS,只能为字符串
+                }
+            }
+        }
+        document.onkeypress = function(params) {
+            key = params['key']
+            if (!(key in website) ){  //不是hash当中的键不执行打开网页
+                console.log("不是这里的")
+            }else{
+                Website = website[key]
+                window.open("http://"+Website, '_blank')
+            }
+            
+            //location.href="http://"+website
+            
+        }
+    </script>
+</body>
+</html>
