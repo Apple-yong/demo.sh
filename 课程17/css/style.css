@@ -2,8 +2,25 @@
     padding: 0;
     margin: 0;
 }
+body{
+    background-color: cornsilk;
+    background-size: cover;
+}
 a{
     text-decoration: none;
+    color: black;
+}
+.wrapper{
+    background: rgba(199, 192, 192, 0.247);
+    padding: 25px;
+    border-radius: 10px;
+}
+main{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    height: 100vh;
 }
 kbd{
     border-radius: 5px;
@@ -32,10 +49,17 @@ kbd > div{
     border: 1px solid black;
     display: none;
 }
+kbd img{
+    width: 16px;
+    height: 16px;
+}
 kbd:hover > div{
     display: inline-block;
 }
 #keyboard > div{
     text-align: center;
     padding: 10px 20px;
+}
+.wrapper div kbd:last-child{
+    margin-right: 0;
 }

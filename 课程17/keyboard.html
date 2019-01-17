@@ -15,13 +15,13 @@
     </main>
     <footer></footer>
     <script>
-        keys = {
+        var keys = {
             '0' : {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
             '1' : {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
             '2' : {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
             'length' : 3
         }
-        website = {
+        var website = {
             'q': 'qq.com', 
             'w': 'weibo.com', 
             'e': 'ele.me', 
@@ -38,24 +38,34 @@
             'm': 'www.mcdonalds.com.cn'
 		}
         // 取出localStorage中localwebsite对应的hash
-        hashInlocalStorage = JSON.parse(localStorage.getItem('localwebsite') || 'null')
+        var hashInlocalStorage = JSON.parse(localStorage.getItem('localwebsite') || 'null')
         if(hashInlocalStorage){
             website = hashInlocalStorage
         }
         // 将所有数按三排打印出来
         for(i=0;i<keys.length;i++){
-            x = document.createElement("div")
+            var x = document.createElement("div")
             keyboard.appendChild(x) //将节点插入到父节点里的末端
             for(j=0;j<keys[i]['length'];j++){
-                kbd = document.createElement("kbd")
+                var kbd = document.createElement("kbd")
                 kbd.textContent = keys[i][j]
+                var web = keys[i][j]
+                // 给每个按钮一个点击链接
+                kbd.setAttribute('onclick',"window.open('http://" + website[web]+"')")
                 x.appendChild(kbd)
+                // 给按钮加上网址图标
+                var faviconimg = document.createElement("img")
+                faviconimg.src = 'http://' + website[web] + '/favicon.ico'
+                kbd.appendChild(faviconimg)
 
-                Ebutton = document.createElement("div")
+                //加修改按钮
+                var Ebutton = document.createElement("div")
                 Ebutton.textContent = 'E'
                 Ebutton.id = keys[i][j]
                 Ebutton.setAttribute('title', '修改');
                 kbd.appendChild(Ebutton)
+                
+                // 修改按键按下
                 Ebutton.onclick = function (param) {
                     key = param['target']['id'] //获取button的id值,target用户点击的元素
                     x = prompt('请输入网址：') //js一个弹出文本输入方法
@@ -64,6 +74,7 @@
                 }
             }
         }
+        // 执行按键
         document.onkeypress = function(params) {
             key = params['key']
             if (!(key in website) ){  //不是hash当中的键不执行打开网页
@@ -71,10 +82,8 @@
             }else{
                 Website = website[key]
                 window.open("http://"+Website, '_blank')
-            }
-            
-            //location.href="http://"+website
-            
+            }   
+            //location.href="http://"+website   
         }
     </script>
 </body>
