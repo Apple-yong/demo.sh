@@ -71,6 +71,7 @@
                     x = prompt('请输入网址：') //js一个弹出文本输入方法
                     website[key] = x  //将输入的值写入hash
                     localStorage.setItem('localwebsite',JSON.stringify(website)) //存入localStorage本地存储，不走JS,只能为字符串
+                    event.stopPropagation();
                 }
             }
         }
