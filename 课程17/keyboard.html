@@ -15,77 +15,143 @@
     </main>
     <footer></footer>
     <script>
-        var keys = {
-            '0' : {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
-            '1' : {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
-            '2' : {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
-            'length' : 3
-        }
-        var website = {
-            'q': 'qq.com', 
-            'w': 'weibo.com', 
-            'e': 'ele.me', 
-            'r': 'renren.com', 
-            't': 'tianya.com', 
-            'y': 'youtube.com', 
-            'u': 'uc.com' , 
-            'i': 'iqiyi.com', 
-            'o': 'opera.com', 
-            'p': undefined, 
-            'a': 'acfun.tv', 
-            's': 'sohu.com', 
-            'z': 'zhihu.com', 
-            'm': 'www.mcdonalds.com.cn'
-		}
-        // 取出localStorage中localwebsite对应的hash
-        var hashInlocalStorage = JSON.parse(localStorage.getItem('localwebsite') || 'null')
-        if(hashInlocalStorage){
-            website = hashInlocalStorage
-        }
-        // 将所有数按三排打印出来
-        for(i=0;i<keys.length;i++){
-            var x = document.createElement("div")
-            keyboard.appendChild(x) //将节点插入到父节点里的末端
-            for(j=0;j<keys[i]['length'];j++){
-                var kbd = document.createElement("kbd")
-                kbd.textContent = keys[i][j]
-                var web = keys[i][j]
-                // 给每个按钮一个点击链接
-                kbd.setAttribute('onclick',"window.open('http://" + website[web]+"')")
-                x.appendChild(kbd)
-                // 给按钮加上网址图标
-                var faviconimg = document.createElement("img")
-                faviconimg.src = 'http://' + website[web] + '/favicon.ico'
-                kbd.appendChild(faviconimg)
+        // 1.初始化数据
+        var hashA = init()
+        var keys = hashA['keys']
+        var website = hashA['website']
+        // 2.生成键盘，将所有数按三排打印出来
+        generateKeyboard(keys, website)
+        // 3.监听执行按键
+        listenKeyboard(website)
 
-                //加修改按钮
-                var Ebutton = document.createElement("div")
-                Ebutton.textContent = 'E'
-                Ebutton.id = keys[i][j]
-                Ebutton.setAttribute('title', '修改');
-                kbd.appendChild(Ebutton)
+
+// 函数
+        // 1.初始化数据
+        function init() {
+            var keys = {
+                '0' : {0:'q',1:'w',2:'e',3:'r',4:'t',5:'y',6:'u',7:'i',8:'o',9:'p',length:10},
+                '1' : {0:'a',1:'s',2:'d',3:'f',4:'g',5:'h',6:'j',7:'k',8:'l',length:9},
+                '2' : {0:'z',1:'x',2:'c',3:'v',4:'b',5:'n',6:'m',length:7},
+                'length' : 3
+            }
+            var website = {
+                'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me', 'r': 'renren.com', 't': 'tencent.com', 'y': 'youku.com', 'u': 'uc.com' , 'i': 'iqiyi.com', 'o': 'opera.com', 'p': undefined, 
+                'a': 'acfun.tv', 's': 'sina.com', 'f': '','g': '','h': '','j': '','k': '','l': '',
+                'z': 'zhihu.com', 'x': '','c': '','v': '','b': '','n': '','m': 'www.mcdonalds.com.cn'
+            }
+            // 取出localStorage中localwebsite对应的hash
+            var hashInlocalStorage = getFromlocalStorage('localwebsite')
+            if(hashInlocalStorage){
+                website = hashInlocalStorage
+            }
+            return {
+                "keys": keys,
+                "website": website
+            }
+        }
+
+        // 键盘生成
+        function generateKeyboard(keys, website){
+            for(i=0;i<keys.length;i++){
+                var x = tag("div")
+                keyboard.appendChild(x) //将节点插入到父节点里的末端
+                for(j=0;j<keys[i]['length'];j++){
+                    var span = creatSpan(keys[i][j])
+                    //加修改按钮
+                    var Ebutton = creatButton(keys[i][j])
+                    // 给按钮加上网址图标 
+                    var faviconimg = creatImg(website[keys[i][j]])
                 
-                // 修改按键按下
-                Ebutton.onclick = function (param) {
-                    key = param['target']['id'] //获取button的id值,target用户点击的元素
-                    x = prompt('请输入网址：') //js一个弹出文本输入方法
-                    website[key] = x  //将输入的值写入hash
-                    localStorage.setItem('localwebsite',JSON.stringify(website)) //存入localStorage本地存储，不走JS,只能为字符串
-                    event.stopPropagation();
+                    var kbd = tag("kbd")
+                    // 给每个按钮一个点击链接
+                    kbd.setAttribute('onclick',"window.open('http://" + website[keys[i][j]]+"')")
+                    kbd.appendChild(span) //包一个span标签
+                    kbd.appendChild(faviconimg)
+                    kbd.appendChild(Ebutton)
+                    x.appendChild(kbd)
                 }
             }
         }
-        // 执行按键
-        document.onkeypress = function(params) {
-            key = params['key']
-            if (!(key in website) ){  //不是hash当中的键不执行打开网页
-                console.log("不是这里的")
-            }else{
-                Website = website[key]
-                window.open("http://"+Website, '_blank')
-            }   
-            //location.href="http://"+website   
+        // 按键监听
+        function listenKeyboard(website) {
+            document.onkeypress = function(params) {
+                key = params['key']
+                if (!(key in website) ){  //不是hash当中的键不执行打开网页
+                    console.log("不是这里的")
+                }else{
+                    Website = website[key]
+                    window.open("http://"+Website, '_blank')
+                }   
+                //location.href="http://"+website   
+            }
         }
+
+        function creatSpan(textContent) {
+            var span = tag("span")
+            span.textContent = textContent
+            return span
+        }
+
+        //创建按钮
+        function creatButton(id){
+            //加修改按钮
+            var Ebutton = tag("div")
+            Ebutton.textContent = 'E'
+            Ebutton.id = id
+            Ebutton.setAttribute('title', '修改');
+            // 修改按键按下
+            Ebutton.onclick = function (param) {
+                var button2 = param['target']
+                var img2 = button2.previousSibling
+                var kbd = img2.parentNode //获取该父元素
+                var key = param['target']['id'] //获取button的id值,target用户点击的元素
+                var x = prompt('请输入网址：（如：qq.com）') //js一个弹出文本输入方法
+                website[key] = x  //将输入的值写入hash
+                kbd.setAttribute('onclick',"window.open('http://" + x +"')")//将输入的链接填入按钮跳转链接中
+                img2.src = 'http://' + x + '/favicon.ico'
+                img2.onerror = function (a) {
+                    a.target.src = 'https://i.loli.net/2019/01/18/5c414673539cb.png'
+                }
+                localStorage.setItem('localwebsite',JSON.stringify(website)) //存入localStorage本地存储，不走JS,只能为字符串
+                preventBubble();
+            }
+            return Ebutton
+        }
+
+        //创建图片
+        function creatImg(domain) {
+            var faviconimg = tag("img")
+            if(domain){
+                faviconimg.src = 'http://' + domain + '/favicon.ico'
+            }else{
+                faviconimg.src = 'https://i.loli.net/2019/01/18/5c414673539cb.png'
+            }
+            // 图片获取不到替换
+            faviconimg.onerror = function (a) {
+                a.target.src = 'https://i.loli.net/2019/01/18/5c414673539cb.png'
+            }
+            return faviconimg
+        }
+        
+        function tag(tagName){
+            return element = document.createElement(tagName)
+        }
+
+        function getFromlocalStorage(a){
+            return JSON.parse(localStorage.getItem(a) || 'null')
+        }
+
+        
+        // 阻止事件冒泡
+        function preventBubble(event){
+            var e=arguments.callee.caller.arguments[0]||event; //若省略此句，下面的e改为event，IE运行可以，但是其他浏览器就不兼容
+            if (e && e.stopPropagation) {
+                e.stopPropagation();
+            } else if (window.event) {
+                window.event.cancelBubble = true;
+            }
+        }
+
     </script>
 </body>
 </html>
