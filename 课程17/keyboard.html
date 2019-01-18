@@ -35,9 +35,9 @@
                 'length' : 3
             }
             var website = {
-                'q': 'qq.com', 'w': 'weibo.com', 'e': 'ele.me', 'r': 'renren.com', 't': 'tencent.com', 'y': 'youku.com', 'u': 'uc.com' , 'i': 'iqiyi.com', 'o': 'opera.com', 'p': undefined, 
-                'a': 'acfun.tv', 's': 'sina.com', 'f': '','g': '','h': '','j': '','k': '','l': '',
-                'z': 'zhihu.com', 'x': '','c': '','v': '','b': '','n': '','m': 'www.mcdonalds.com.cn'
+                'q': 'im.qq.com', 'w': 'weibo.com', 'e': 'ele.me', 'r': 'rockstargames.com', 't': 'tencent.com', 'y': 'youku.com', 'u': 'uc.cn' , 'i': 'iqiyi.com', 'o': 'opera.com', 'p': '', 
+                'a': 'acfun.cn', 's': 'sina.com.cn', 'd':'', 'f': '','g': '','h': '','j': '','k': '','l': '',
+                'z': 'zhihu.com', 'x': 'xunlei.com','c': '','v': '','b': '','n': '','m': 'www.mcdonalds.com.cn'
             }
             // 取出localStorage中localwebsite对应的hash
             var hashInlocalStorage = getFromlocalStorage('localwebsite')
@@ -64,7 +64,9 @@
                 
                     var kbd = tag("kbd")
                     // 给每个按钮一个点击链接
-                    kbd.setAttribute('onclick',"window.open('http://" + website[keys[i][j]]+"')")
+                    if(website[keys[i][j]]){//判断是否为空
+                        kbd.setAttribute('onclick',"window.open('http://" + website[keys[i][j]]+"')")
+                    }
                     kbd.appendChild(span) //包一个span标签
                     kbd.appendChild(faviconimg)
                     kbd.appendChild(Ebutton)
@@ -76,12 +78,10 @@
         function listenKeyboard(website) {
             document.onkeypress = function(params) {
                 key = params['key']
-                if (!(key in website) ){  //不是hash当中的键不执行打开网页
-                    console.log("不是这里的")
-                }else{
+                if (key in website){  //不是hash当中的键不执行打开网页
                     Website = website[key]
                     window.open("http://"+Website, '_blank')
-                }   
+                }
                 //location.href="http://"+website   
             }
         }
