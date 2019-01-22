@@ -1,0 +1,12 @@
+body{
+    margin: 0;
+}
+#canvas{
+    /* background-color: red; */
+    height: 100vh;
+    position: relative
+}
+#canvasTwo{
+    background: green;
+    display: block;
+}
