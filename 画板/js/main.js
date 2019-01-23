@@ -53,7 +53,7 @@ var canvasTwo = document.getElementById('canvasTwo')
 var ctx = canvasTwo.getContext('2d');
 //画板尺寸
 autoSetcanvasSize(canvasTwo)
-listenUserMouse(canvasTwo)
+listenToUser(canvasTwo)
 
 
 //橡皮擦
@@ -83,7 +83,7 @@ function autoSetcanvasSize(canvasTwo){
     }
 }
 //监听用户鼠标
-function listenUserMouse(canvasTwo){
+function listenToUser(canvasTwo){
     var lastPoint = {x:undefined, y:undefined}
     var painting = false
     // 填充
@@ -93,37 +93,73 @@ function listenUserMouse(canvasTwo){
     // ctx.strokeStyle = 'yellow';
     // ctx.strokeRect(10, 10, 100, 100);
 
-    //监听鼠标事件，按下鼠标
-    canvasTwo.onmousedown = function (a) {
-        var x = a.clientX
-        var y = a.clientY
-        painting = true
-        if(UsingEraser){
-            ctx.clearRect(x-5,y-5,10,10)
-        }else{
-            drawCircle(x, y, 3)
-            lastPoint = {"x":x,"y":y}
+    //特性检测，检测是不是触屏设备
+    if(document.body.ontouchstart !== undefined){
+        //触屏设备
+        canvasTwo.ontouchstart = function (a) {
+            var x = a.touches[0].clientX
+            var y = a.touches[0].clientY
+            painting = true
+            if(UsingEraser){
+                ctx.clearRect(x-5,y-5,10,10)
+            }else{
+                drawCircle(x, y, 3)
+                lastPoint = {"x":x,"y":y}
+            }
+        }
+        // 移动手指
+        canvasTwo.ontouchmove = function (a) {
+            var x = a.touches[0].clientX
+            var y = a.touches[0].clientY
+            if(!painting){
+                return
+            }
+            if(UsingEraser){
+                ctx.clearRect(x-5,y-5,10,10)    
+            }else{
+                var newPoint = {"x":x,"y":y}
+                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+                lastPoint = newPoint
+            }    
+        }
+        //松开手
+        canvasTwo.ontouchend = function (a) {
+            painting = false
+        }
+    }else{
+        //非触屏设备
+        canvasTwo.onmousedown = function (a) {
+            var x = a.clientX
+            var y = a.clientY
+            painting = true
+            if(UsingEraser){
+                ctx.clearRect(x-5,y-5,10,10)
+            }else{
+                drawCircle(x, y, 3)
+                lastPoint = {"x":x,"y":y}
+            }
+        }
+        // 移动鼠标
+        canvasTwo.onmousemove = function (a) {
+            var x = a.clientX
+            var y = a.clientY
+            if(!painting){
+                return
+            }
+            if(UsingEraser){
+                ctx.clearRect(x-5,y-5,10,10)    
+            }else{
+                var newPoint = {"x":x,"y":y}
+                drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
+                lastPoint = newPoint
+            }    
+        }
+        //松开鼠标
+        canvasTwo.onmouseup = function (a) {
+            painting = false
         }
     }
-    // 移动鼠标
-    canvasTwo.onmousemove = function (a) {
-        var x = a.clientX
-        var y = a.clientY
-        if(!painting){
-            return
-        }
-        if(UsingEraser){
-            ctx.clearRect(x-5,y-5,10,10)    
-        }else{
-            var newPoint = {"x":x,"y":y}
-            drawLine(lastPoint.x, lastPoint.y, newPoint.x, newPoint.y)
-            lastPoint = newPoint
-        }    
-    }
-    //松开鼠标
-    canvasTwo.onmouseup = function (a) {
-        painting = false
-    }
+    
 }
 // 画圈
 function drawCircle(x, y, radius) {  
@@ -141,3 +177,4 @@ function drawLine(x1, y1, x2, y2) {
     ctx.lineTo(x2, y2)//终点
     ctx.stroke()
 }
+
