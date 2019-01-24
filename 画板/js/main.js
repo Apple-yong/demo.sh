@@ -63,20 +63,7 @@ brushSwitch()
 
 
 
-
-//图片保存
-function putImage(){
-    var url = canvasTwo.toDataURL("image/png")
-    var a = document.createElement('a')
-    document.body.appendChild(a)
-    a.href = url
-    a.target = '_blank'
-    a.click()
-    
-    // //或者这样，下下来的直接改后缀png或img
-    // var image = canvasTwo.toDataURL("image/png").replace("image/png", "image/octet-stream");
-    // window.location.href=image; 
-}  
+ 
 //设置画板尺寸
 function autoSetcanvasSize(canvasTwo){
     canvasSize()
@@ -211,7 +198,6 @@ function switchOver(){
         }
     }
 }
-
 //画笔颜色选择
 function colorSelection() {  
     var colorsLis = document.getElementsByClassName("colors")[0].children;//class不唯一
@@ -242,6 +228,19 @@ function brushSwitch(){
         thin.classList.remove('active')
     }
 }
+//图片保存
+function putImage(){
+    var url = canvasTwo.toDataURL("image/png")
+    var a = document.createElement('a')
+    document.body.appendChild(a)
+    a.href = url
+    a.target = '_blank'
+    a.click()
+    
+    // //或者这样，下下来的直接改后缀png或img
+    // var image = canvasTwo.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    // window.location.href=image; 
+} 
 //清空画板
 clear.onclick = function () {
     ctx.clearRect(0, 0, canvasTwo.width, canvasTwo.height);
