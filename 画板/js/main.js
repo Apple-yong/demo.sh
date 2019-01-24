@@ -202,14 +202,16 @@ function switchOver(){
                     colors.children[0].classList.add('active')
                     ctx.fillStyle = colors.children[0].id
                     ctx.strokeStyle = colors.children[0].id
-                    $(colors.children[0]).siblings("li").removeClass('active')
+                    getSiblings(this)[0].classList.remove('active')
                 }
                 this.classList.add('active')
-                $(this).siblings("svg").removeClass('active')
+                getSiblings(this)[0].classList.remove('active')
+                //$(this).siblings("svg").removeClass('active')
             }  
         }
     }
 }
+
 //画笔颜色选择
 function colorSelection() {  
     var colorsLis = document.getElementsByClassName("colors")[0].children;//class不唯一
@@ -219,7 +221,11 @@ function colorSelection() {
             ctx.fillStyle = idName
             ctx.strokeStyle = idName
             this.classList.add('active')
-            $(this).siblings("li").removeClass('active')
+            for(var i=0;i<getSiblings(this).length;i++){
+                getSiblings(this)[i].classList.remove('active')
+            }
+            
+            //$(this).siblings("li").removeClass('active')
         }
     } 
 }
@@ -239,5 +245,16 @@ function brushSwitch(){
 //清空画板
 clear.onclick = function () {
     ctx.clearRect(0, 0, canvasTwo.width, canvasTwo.height);
+}
+// 原生JS获取this之外的其他元素，等价于jquery的siblings
+function getChildren(n, skipMe){
+    var r = [];
+    for ( ; n; n = n.nextSibling ) 
+       if ( n.nodeType == 1 && n != skipMe)
+          r.push( n );        
+    return r;
+}
+function getSiblings(n) {
+    return getChildren(n.parentNode.firstChild, n);
 }
 
