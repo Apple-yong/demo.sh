@@ -51,23 +51,32 @@
 // canvas属性画图
 var canvasTwo = document.getElementById('canvasTwo')
 var ctx = canvasTwo.getContext('2d');
+var lineWidth = 5
+var UsingEraser = false
+
 //画板尺寸
 autoSetcanvasSize(canvasTwo)
 listenToUser(canvasTwo)
+switchOver()
+colorSelection()
+brushSwitch()
 
 
-//橡皮擦
-var UsingEraser = false
-eraser.onclick = function () {  
-    UsingEraser = true
-    actions.className = 'actions x'
-}
-brush.onclick = function () {  
-    UsingEraser = false
-    actions.className = 'actions'
-}
 
 
+//图片保存
+function putImage(){
+    var url = canvasTwo.toDataURL("image/png")
+    var a = document.createElement('a')
+    document.body.appendChild(a)
+    a.href = url
+    a.target = '_blank'
+    a.click()
+    
+    // //或者这样，下下来的直接改后缀png或img
+    // var image = canvasTwo.toDataURL("image/png").replace("image/png", "image/octet-stream");
+    // window.location.href=image; 
+}  
 //设置画板尺寸
 function autoSetcanvasSize(canvasTwo){
     canvasSize()
@@ -103,7 +112,7 @@ function listenToUser(canvasTwo){
             if(UsingEraser){
                 ctx.clearRect(x-5,y-5,10,10)
             }else{
-                drawCircle(x, y, 3)
+                drawCircle(x, y, 2)
                 lastPoint = {"x":x,"y":y}
             }
         }
@@ -135,7 +144,7 @@ function listenToUser(canvasTwo){
             if(UsingEraser){
                 ctx.clearRect(x-5,y-5,10,10)
             }else{
-                drawCircle(x, y, 3)
+                drawCircle(x, y, 2)
                 lastPoint = {"x":x,"y":y}
             }
         }
@@ -164,17 +173,71 @@ function listenToUser(canvasTwo){
 // 画圈
 function drawCircle(x, y, radius) {  
     ctx.beginPath()
-    ctx.fillStyle = 'black'
     ctx.arc(x, y, radius, 0, Math.PI * 2)
     ctx.fill()
 }
 // 画线
 function drawLine(x1, y1, x2, y2) {  
     ctx.beginPath()
-    ctx.strokeStyle = 'black'
     ctx.moveTo(x1, y1)//起点
-    ctx.lineWidth = 5
+    ctx.lineWidth = lineWidth
     ctx.lineTo(x2, y2)//终点
     ctx.stroke()
+}
+//橡皮擦画笔切换
+function switchOver(){
+    for(var i=0;i<actions.children.length;i++){//id的话可以直接actions.children获取子元素
+        actions.children[i].onclick = function () { 
+            var idName = this.id
+            if(idName === "saveImage"){
+                return
+            }else{
+                if(idName === "eraser"){
+                    UsingEraser = true
+                    for(var j=0;j<colors.children.length;j++){//橡皮模式移除铅笔下颜色的active
+                        colors.children[j].classList.remove('active')
+                    }
+                }else{
+                    UsingEraser = false
+                    colors.children[0].classList.add('active')
+                    ctx.fillStyle = colors.children[0].id
+                    ctx.strokeStyle = colors.children[0].id
+                    $(colors.children[0]).siblings("li").removeClass('active')
+                }
+                this.classList.add('active')
+                $(this).siblings("svg").removeClass('active')
+            }  
+        }
+    }
+}
+//画笔颜色选择
+function colorSelection() {  
+    var colorsLis = document.getElementsByClassName("colors")[0].children;//class不唯一
+    for(var m=0;m<colorsLis.length;m++){
+        colorsLis[m].onclick = function () {  
+            var idName = this.id
+            ctx.fillStyle = idName
+            ctx.strokeStyle = idName
+            this.classList.add('active')
+            $(this).siblings("li").removeClass('active')
+        }
+    } 
+}
+//画笔粗细切换
+function brushSwitch(){
+    thin.onclick = function () {
+        lineWidth = 5
+        this.classList.add('active')
+        thick.classList.remove('active')
+    }
+    thick.onclick = function () {
+        lineWidth = 10
+        this.classList.add('active')
+        thin.classList.remove('active')
+    }
+}
+//清空画板
+clear.onclick = function () {
+    ctx.clearRect(0, 0, canvasTwo.width, canvasTwo.height);
 }
 
