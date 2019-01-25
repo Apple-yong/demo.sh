@@ -189,7 +189,10 @@ function switchOver(){
                     colors.children[0].classList.add('active')
                     ctx.fillStyle = colors.children[0].id
                     ctx.strokeStyle = colors.children[0].id
-                    getSiblings(this)[0].classList.remove('active')
+                    console.log(getSiblings(colors.children[0]))
+                    for(var m=0;m<getSiblings(colors.children[0]).length;m++){//点铅笔取消所有颜色的active
+                        getSiblings(colors.children[0])[m].classList.remove('active')
+                    }   
                 }
                 this.classList.add('active')
                 getSiblings(this)[0].classList.remove('active')
@@ -246,14 +249,14 @@ clear.onclick = function () {
     ctx.clearRect(0, 0, canvasTwo.width, canvasTwo.height);
 }
 // 原生JS获取this之外的其他元素，等价于jquery的siblings
-function getChildren(n, skipMe){
-    var r = [];
-    for ( ; n; n = n.nextSibling ) 
-       if ( n.nodeType == 1 && n != skipMe)
-          r.push( n );        
-    return r;
-}
 function getSiblings(n) {
     return getChildren(n.parentNode.firstChild, n);
+    function getChildren(n, skipMe){
+        var r = [];
+        for ( ; n; n = n.nextSibling ) 
+           if ( n.nodeType == 1 && n != skipMe)
+              r.push( n );        
+        return r;
+    }
 }
 
