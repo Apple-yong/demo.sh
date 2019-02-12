@@ -1,3 +1,4 @@
+siteWelcome.classList.remove('active')
 portfolio1.onclick = function () {  
     portfolioBar.className = "bar state-1"
 }
