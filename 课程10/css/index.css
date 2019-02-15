@@ -101,9 +101,17 @@ h1, h2, h3, h4, h5, h6 {
     font-weight: bold;
     padding-bottom: 4px;
     color:inherit;
+    position: relative;
 }
-.topNavBar nav ul>li>a:hover{
-    border-bottom: 3px solid #e06567;
+.topNavBar nav ul>li>a:hover::after{
+    content:'';
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background: #E06567;
+    height: 3px;
 }
 
 
