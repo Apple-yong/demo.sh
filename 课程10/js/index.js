@@ -32,8 +32,8 @@ for(let i=0; i<liTags.length; i++){
 let aTags = document.querySelectorAll('nav.menu > ul > li > a')
 for(let i=0; i<aTags.length; i++){
     aTags[i].onclick = function (x) {
-        x.preventDefault();
-        let href = x.currentTarget.getAttribute('href')
+        x.preventDefault();//取消默认的锚点滚动
+        let href = this.getAttribute('href')
         let element = document.querySelector(href)
         let top = element.offsetTop//获取该div到定点的距离
         window.scrollTo(0, top-80)
