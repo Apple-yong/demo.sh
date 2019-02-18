@@ -104,7 +104,7 @@ h1, h2, h3, h4, h5, h6 {
     color:inherit;
     position: relative;
 }
-.topNavBar nav ul>li>a:hover::after{
+.topNavBar nav ul>li.active>a::after{
     content:'';
     display: block;
     position: absolute;
@@ -128,20 +128,32 @@ h1, h2, h3, h4, h5, h6 {
     margin: 0;
     text-align: left;
 }
-.topNavBar nav ul>li>ul>li:first-child{
-    margin-top: 10px;
-}
+
 .topNavBar .submenu{
     display: none;
     position: absolute;
-    left: 0;
+    right: 0;
     top: 100%;
+    background: white;
+    color: #3d4451;
+    margin-top: 7px;
+    box-shadow: 0px 0px 7px 0px rgba(0,0,0,0.64);
 }
 .topNavBar .submenu>li{
     white-space: nowrap;
+    padding:5px 10px;
 }
-.topNavBar .submenu.active{
+.topNavBar li.active> .submenu{
     display: block;
+    animation: submenuSlide 0.3s;
+}
+@keyframes submenuSlide{
+    0%{
+        margin-right: 100%;
+    }
+    100%{
+        margin-right: 0;
+    }
 }
 
 
