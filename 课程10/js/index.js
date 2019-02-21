@@ -28,7 +28,6 @@ for(let i=0; i<liTags.length; i++){
     }
 }
 
-
 let aTags = document.querySelectorAll('nav.menu > ul > li > a')
 for(let i=0; i<aTags.length; i++){
     aTags[i].onclick = function (x) {
@@ -36,19 +35,37 @@ for(let i=0; i<aTags.length; i++){
         // let href = this.getAttribute('href')
         // let element = document.querySelector(href)
         let top = document.querySelector(this.getAttribute('href')).offsetTop//获取该div到定点的距离
-        let n = 25 //动25次
-        let duration = 500 / n //多少时间动一次
+        // let n = 25 //动25次
+        // let duration = 500 / n //多少时间动一次
         let currentTop = window.scrollY //当前高度
         let targetTop = top - 80 //目标top
-        let distance = (targetTop - currentTop)/ n //每次动多少
-        let i = 0
-        let id = setInterval(() => {
-            if(i===n){ //等于25次时停止
-                window.clearInterval(id)
-                return
-            }
-            i = i + 1
-            window.scrollTo(0, currentTop + distance * i)
-        }, duration)  
+        // let distance = (targetTop - currentTop)/ n //每次动多少
+        // let i = 0
+        // let id = setInterval(() => {
+        //     if(i===n){ //等于25次时停止
+        //         window.clearInterval(id)
+        //         return
+        //     }
+        //     i = i + 1
+        //     window.scrollTo(0, currentTop + distance * i)
+        // }, duration)    
+        var coords = { y: currentTop }; 
+        var tween = new TWEEN.Tween(coords) 
+        .to({ y: targetTop }, 500) 
+        .easing(TWEEN.Easing.Quadratic.In) 
+        .onUpdate(function() { 
+            window.scrollTo(0,coords.y)
+        })
+        .start();
     }
 }
+
+
+
+// Setup the animation loop.
+function animate(time) {
+    requestAnimationFrame(animate);
+    TWEEN.update(time);
+}
+requestAnimationFrame(animate);
+
