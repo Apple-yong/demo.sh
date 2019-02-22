@@ -1,6 +1,6 @@
 setTimeout(() => {
     siteWelcome.classList.remove('active')
-}, 500);  
+}, 300);  
 portfolio1.onclick = function () {  
     portfolioBar.className = "bar state-1"
 }
@@ -10,8 +10,19 @@ portfolio2.onclick = function () {
 portfolio3.onclick = function () {  
     portfolioBar.className = "bar state-3"
 }
+let specialTags = document.querySelectorAll('[data-x]')
+for(let i=0; i<specialTags.length; i++){
+    specialTags[i].classList.add('offset')
+}
+setTimeout(() => {
+    crollText()
+}, 300);
 window.onscroll = function () {
     window.scrollY > 0 ? (topNavBar.classList.add('sticky')):(topNavBar.classList.remove('sticky'))
+    crollText()
+}
+
+function crollText(){
     let specialTags = document.querySelectorAll('[data-x]')
     let minIndex = 0
     for(let i=0;i<specialTags.length;i++){
@@ -19,6 +30,8 @@ window.onscroll = function () {
             minIndex = i
         }
     }
+    // minIndex就是离窗口顶部最近的元素
+    specialTags[minIndex].classList.remove('offset')
     let id = specialTags[minIndex].id
     let a = document.querySelector('a[href="#'+ id +'"]')
     let li = a.parentNode

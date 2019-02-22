@@ -34,6 +34,21 @@ h1, h2, h3, h4, h5, h6 {
 * html .clearfix { height: 1%; }
 .clearfix { display: block; }
 /* close commented backslash hack */
+[data-x].offset{
+    transform: translateY(200px);
+}
+[data-x]{
+    transform: translateY(0);
+    transition: all 0.5s;
+}
+@keyframes slideUp{
+    0%{
+        transform: translateY(-30px)
+    }
+    100%{
+        transform: translateY(0)
+    }
+}
 
 /* 加载的loading动画 */
 .site-welcome{
@@ -321,11 +336,18 @@ main .abstract{
     background: #FAE1E1;
     border-radius: 2px;
     margin: 4px 0 40px;
+    overflow: hidden;
 }
 .skill ol li .progressBar .progress{
     height: 5px;
     background: #E6686A;
+    width: 70%;
     border-radius: 2px;
+    transform: translateX(0);
+    transition: all 1s;
+}
+#siteSkills.offset .progress{
+    transform: translateX(-100%);
 }
 
 /*作品集*/
