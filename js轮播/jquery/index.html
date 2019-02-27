@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Page Title</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css">
+    <style>
+        .images{
+            display: flex;
+            align-items: flex-start;
+            transition: all 1s;
+        }
+        .images > img{
+            vertical-align: top;
+        }
+        .carousel{
+            width: 300px;
+            overflow: hidden;
+        }
+    </style>
+</head>
+<body>
+    <div class="carousel">
+        <div class="images" id="images">
+            <img width="300" height="300" src="http://img5.3lian.com/gaoqing/03/50/01/942.jpg" alt="">
+            <img width="300" height="300" src="http://8.pic.pc6.com/up/2012-4/201241915629653750.jpg" alt="">
+            <img width="300" height="300" src="http://shipindingzhi.com/wp-content/uploads/2017/08/109-%E5%94%AF%E7%BE%8E%E6%A2%A6%E5%B9%BB%E7%9A%84%E4%BB%99%E5%A2%83%E9%A3%8E%E6%99%AF-%E5%B1%B100_00_1220170828-154704-2-600x600.jpg" alt="">
+        </div>
+    </div>
+    <span id="button">
+        <span id="p1">第一张</span>
+        <span id="p2">第二张</span>
+        <span id="p3">第三张</span>
+    </span>
+    
+
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script src="main.js"></script>
