@@ -34,11 +34,8 @@
 //     })
 // }, 9000);
 
-
-$('.images>img:nth-child(1)').addClass('current')
-$('.images>img:nth-child(2)').addClass('enter')
-$('.images>img:nth-child(3)').addClass('enter')
-let n=1
+let n
+initialize()//初始化
 setInterval(() => {
     $(`.images>img:nth-child(${x(n)})`).removeClass('current').addClass('leave')
     .one('transitionend', function name() { 
@@ -56,4 +53,11 @@ function x(n){
         }
     }
     return n
+}
+
+//初始化
+function initialize() {  
+    n=1
+    $(`.images>img:nth-child(${n})`).addClass('current')
+        .siblings().addClass('enter')
 }
