@@ -37,13 +37,22 @@
 let n
 initialize()//初始化
 setInterval(() => {
-    $(`.images>img:nth-child(${x(n)})`).removeClass('current').addClass('leave')
+    Leave(getImage(n))
     .one('transitionend', function name() { 
-        $(this).removeClass('leave').addClass('enter')
+        Enter($(this))
     })
-    $(`.images>img:nth-child(${x(n+1)})`).removeClass('enter').addClass('current')
+    Current(getImage(n+1))
     n+=1
 }, 3000);
+
+
+
+//初始化
+function initialize() {  
+    n=1
+    $(`.images>img:nth-child(${n})`).addClass('current')
+        .siblings().addClass('enter')
+}
 
 function x(n){
     if(n>3){
@@ -55,9 +64,16 @@ function x(n){
     return n
 }
 
-//初始化
-function initialize() {  
-    n=1
-    $(`.images>img:nth-child(${n})`).addClass('current')
-        .siblings().addClass('enter')
+function getImage(n){
+    return $(`.images > img:nth-child(${x(n)})`)
+}
+
+function Current($node) {  
+    return $node.removeClass('enter').addClass('current')
+}
+function Leave($node) {  
+    return $node.removeClass('current').addClass('leave')
+}
+function Enter($node) {  
+    return $node.removeClass('leave').addClass('enter')
 }
