@@ -43,7 +43,7 @@ let timer = setInterval(() => {
     })
     Current(getImage(n+1))
     n+=1
-}, 2000);
+}, 3000);
 
 //用户切换到其他页面停止播放
 document.addEventListener('visibilitychange',function(){
@@ -57,7 +57,7 @@ document.addEventListener('visibilitychange',function(){
             })
             Current(getImage(n+1))
             n+=1
-        }, 2000);
+        }, 3000);
     }
 })
 
