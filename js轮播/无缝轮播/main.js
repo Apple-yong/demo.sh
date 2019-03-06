@@ -36,16 +36,30 @@
 
 let n
 initialize()//初始化
-setInterval(() => {
+let timer = setInterval(() => {
     Leave(getImage(n))
     .one('transitionend', function name() { 
         Enter($(this))
     })
     Current(getImage(n+1))
     n+=1
-}, 3000);
+}, 2000);
 
-
+//用户切换到其他页面停止播放
+document.addEventListener('visibilitychange',function(){
+    if(document.hidden){
+        window.clearInterval(timer)
+    }else{
+        timer = setInterval(() => {
+            Leave(getImage(n))
+            .one('transitionend', function name() { 
+                Enter($(this))
+            })
+            Current(getImage(n+1))
+            n+=1
+        }, 2000);
+    }
+})
 
 //初始化
 function initialize() {  
