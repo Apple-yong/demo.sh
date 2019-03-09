@@ -21,8 +21,9 @@ $(document).ready(function(){
 			if(!keepScroll) clearInterval(itvl)
 	})
 	
+	//一开始第一项hover
 	$('#menu ul li.menuItem:first').addClass('act').siblings().addClass('inact')
-	/* On page load, mark the first thumbnail as active */
+	
 	
 	
 	
@@ -35,6 +36,9 @@ $(document).ready(function(){
 	}
 
 	//自动轮播秒数
-	var changeEvery = 10
-	var itvl = setInterval(function(){autoAdvance()},changeEvery*1000)
+	var changeEvery = 5
+	var itvl =	setInterval(() => {
+		autoAdvance()
+	}, changeEvery*1000);
+
 })
