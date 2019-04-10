@@ -1,15 +1,15 @@
 setTimeout(() => {
     siteWelcome.classList.remove('active')
 }, 300);  
-portfolio1.onclick = function () {  
-    portfolioBar.className = "bar state-1"
-}
-portfolio2.onclick = function () {  
-    portfolioBar.className = "bar state-2"
-}
-portfolio3.onclick = function () {  
-    portfolioBar.className = "bar state-3"
-}
+// portfolio1.onclick = function () {  
+//     portfolioBar.className = "bar state-1"
+// }
+// portfolio2.onclick = function () {  
+//     portfolioBar.className = "bar state-2"
+// }
+// portfolio3.onclick = function () {  
+//     portfolioBar.className = "bar state-3"
+// }
 let specialTags = document.querySelectorAll('[data-x]')
 for(let i=0; i<specialTags.length; i++){
     specialTags[i].classList.add('offset')

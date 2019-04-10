@@ -367,6 +367,9 @@ main .abstract{
     margin-left: 40px;
     cursor: pointer;
 }
+.portfolio h2{
+    margin-bottom: 30px;
+}
 .portfolio nav ol li:first-child{
     margin-left: 0;
 }
