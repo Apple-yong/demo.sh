@@ -307,7 +307,7 @@ main .abstract{
 }
 
 /*技能*/
-.skill h2, .portfolio h2, .message h2{
+.skill h2, .portfolio h2{
     color: #3d4451;
     font-size: 34px;
     line-height: 1.2;
@@ -422,15 +422,4 @@ main .abstract{
     left: 635px;
     width: 294px;
     height: 278px;
-}
-
-
-section.message > ol{
-    max-width: 700px;
-    margin: 50px auto;
-    border-top: 1px solid #DDD;
-}
-section.message > ol > li {
-    padding: 16px;
-    border-bottom: 1px solid #DDD;
 }
