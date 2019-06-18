@@ -149,12 +149,26 @@
         <div class="swiper-button-next"></div>
       </div>
     </section>
+    <section class="message">
+      <h2>留言</h2>
+      <ol id="messageList">
+      </ol>
+      <form id="postMessageForm" style="width: 700px; margin: 50px auto;">
+        <label for="">姓名</label>
+        <input type="text" name="name">
+        <label for="">内容</label>
+        <input type="text" name="content">
+        <input type="submit" value="提交">
+      </form>
+    </section>
   </body>
 </html>
 <script src="https://cdn.bootcss.com/Swiper/4.5.0/js/swiper.min.js"></script>
 <script src="https://at.alicdn.com/t/font_1006135_3o8kw6qvd74.js"></script>
 <script src="https://cdn.bootcss.com/tween.js/r14/Tween.min.js"></script>
+<script src="https://cdn1.lncld.net/static/js/3.5.0/av-min.js"></script>
 <script src="js/index.js"></script>
+<script src="./js/message.js"></script>
 <script>        
   var mySwiper = new Swiper ('.swiper-container', {
     autoplay: true,//可选选项，自动滑动s
