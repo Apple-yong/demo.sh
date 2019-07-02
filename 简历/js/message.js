@@ -53,7 +53,14 @@
         bindEvents: function () {
             this.form.addEventListener('submit', (e) => {
                 e.preventDefault()
-                this.saveMessage()
+                let myForm = view.querySelector('form');
+                let content = myForm.querySelector('input[name=content]').value
+                let name = myForm.querySelector('input[name=name]').value
+                if (content && name) {
+                    this.saveMessage()
+                }else{
+                    alert('请填写姓名和内容');
+                }
             })
         },
         saveMessage: function () {
