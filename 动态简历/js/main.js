@@ -10,7 +10,7 @@ function writeCss(prefix, code, fn){
         window.clearInterval(id)
         fn && fn.call()
       }
-    }, 1)
+    }, 25)
   }
   function writeMarkdown(markdown, fn){
     let domPaper = document.querySelector('#paper>.content')
