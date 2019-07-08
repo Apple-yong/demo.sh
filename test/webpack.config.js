@@ -3,8 +3,8 @@ const path = require('path');
 module.exports = {
   entry: './src/js/app.js',
   output: {
-    filename: 'main.js',
-    path: path.resolve(__dirname, 'dist/js/')
+    filename: 'bundle.js',
+    path: path.resolve(__dirname, 'dist/js')
   },
   module: {
     rules: [
@@ -29,28 +29,7 @@ module.exports = {
         }, {
             loader: "sass-loader" // 将 Sass 编译成 CSS
         }]
-      },
-      {
-        test: /\.(png|jpg|gif)$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              name: 'images/[name].[ext]?[hash]'
-            }
-          }
-        ]
-      },
-      {
-        test: /\.(html)$/,
-        use: {
-          loader: 'html-loader',
-          options: {
-            attrs: [':data-src']
-          }
-        }
       }
-      
     ]
   }
 };
