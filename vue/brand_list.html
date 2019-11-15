@@ -54,12 +54,17 @@
         </table>
 
     </div>
+
+    <div id="app2">
+        <h2>{{ dt | dataFormat('') }}</h2>
+    </div>
 </body>
 
 </html>
 <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 <script>
-    Vue.filter('dataFormat', function (dateStr, pattern) {
+    //全局过滤器
+    Vue.filter('dataFormat', function (dateStr, pattern = '') {
         let dt = new Date(dateStr)
         let y = dt.getFullYear()
         let m = dt.getMonth() + 1
@@ -70,7 +75,8 @@
             let hh = dt.getHours()
             let mm = dt.getMinutes()
             let ss = dt.getSeconds()
-            return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+            return `${y}-${m < 10 ? ('0' + m) : m}-${d < 10 ? ('0' + d) : d} 
+            ${hh < 10 ? ('0' + hh) : hh}:${mm < 10 ? ('0' + mm) : mm}:${ss < 10 ? ('0' + ss) : ss}`
         }
     })
 
@@ -122,6 +128,36 @@
                         return item
                     }
                 })
+            }
+        }
+    })
+
+
+    //私有过滤器，两个过滤器名称相同，默认用私有过滤器
+    var vm2 = new Vue({
+        el: "#app2",
+        data: {
+            dt: new Date()
+        },
+        methods: {
+
+        },
+        filters: {
+            dataFormat: function (dateStr, pattern = '') {
+                let dt = new Date(dateStr)
+                let y = dt.getFullYear()
+                let m = dt.getMonth() + 1
+                let d = dt.getDate()
+                if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+                    return `${y}-${m}-${d}`
+                } else {
+                    let hh = dt.getHours()
+                    let mm = dt.getMinutes()
+                    let ss = dt.getSeconds()
+                    return `${y}-${m < 10 ? ('0' + m) : m}-${d < 10 ? ('0' + d) : d} 
+            ${hh < 10 ? ('0' + hh) : hh}:${mm < 10 ? ('0' + mm) : mm}:${ss < 10 ? ('0' + ss) : ss}`
+                }
+
             }
         }
     })
