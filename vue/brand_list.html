@@ -47,7 +47,7 @@
                 <tr v-for="item in search(keywords)" :key="item.id">
                     <td>{{ item.id }}</td>
                     <td>{{ item.name }}</td>
-                    <td v-text="item.ctime"></td>
+                    <td>{{ item.ctime | dataFormat('') }}</td>
                     <td><a href="" @click.prevent="del(item.id)">删除</a></td>
                 </tr>
             </tbody>
@@ -59,6 +59,22 @@
 </html>
 <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 <script>
+    Vue.filter('dataFormat', function (dateStr, pattern) {
+        let dt = new Date(dateStr)
+        let y = dt.getFullYear()
+        let m = dt.getMonth() + 1
+        let d = dt.getDate()
+        if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+            return `${y}-${m}-${d}`
+        } else {
+            let hh = dt.getHours()
+            let mm = dt.getMinutes()
+            let ss = dt.getSeconds()
+            return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+        }
+    })
+
+
     var vm = new Vue({
         el: "#app",
         data: {
@@ -100,9 +116,9 @@
                 //     }
                 // })
                 // return newList
-                return this.list.filter(item =>{
+                return this.list.filter(item => {
                     // 包含某个字符
-                    if(item.name.includes(keywords)){
+                    if (item.name.includes(keywords)) {
                         return item
                     }
                 })
