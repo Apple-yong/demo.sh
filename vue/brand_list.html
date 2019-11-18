@@ -10,54 +10,54 @@
 </head>
 
 <body>
-    <div id="app">
+<div id="app">
 
-        <div class="panel panel-primary">
-            <div class="panel-heading">
-                <h3 class="panel-title">添加品牌</h3>
-            </div>
-            <div class="panel-body form-inline">
-                <label>
-                    Id:
-                    <input type="text" v-model="id" class="form-control">
-                </label>
-                <label>
-                    Name:
-                    <input type="text" v-model="name" class="form-control" @keyup.f2="add">
-                </label>
-                <input type="button" value="添加" class="btn btn-primary" @click="add()">
-                <label>
-                    搜索关键词：
-                    <input type="text" v-model="keywords" class="form-control">
-                </label>
-            </div>
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加品牌</h3>
         </div>
-
-
-        <table class="table table-hover table-striped">
-            <thead>
-                <tr>
-                    <th>Id</th>
-                    <th>Name</th>
-                    <th>Ctime</th>
-                    <th>Operation</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr v-for="item in search(keywords)" :key="item.id">
-                    <td>{{ item.id }}</td>
-                    <td>{{ item.name }}</td>
-                    <td>{{ item.ctime | dataFormat('') }}</td>
-                    <td><a href="" @click.prevent="del(item.id)">删除</a></td>
-                </tr>
-            </tbody>
-        </table>
-
+        <div class="panel-body form-inline">
+            <label>
+                Id:
+                <input type="text" v-model="id" class="form-control">
+            </label>
+            <label>
+                Name:
+                <input type="text" v-model="name" class="form-control" @keyup.f2="add">
+            </label>
+            <input type="button" value="添加" class="btn btn-primary" @click="add()">
+            <label>
+                搜索关键词：
+                <input type="text" v-model="keywords" class="form-control" v-focus v-color="'red'">
+            </label>
+        </div>
     </div>
 
-    <div id="app2">
-        <h2>{{ dt | dataFormat('') }}</h2>
-    </div>
+
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Ctime</th>
+            <th>Operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in search(keywords)" :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.ctime | dataFormat('') }}</td>
+            <td><a href="" @click.prevent="del(item.id)">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>
+
+<div id="app2">
+    <h2>{{ dt | dataFormat('') }}</h2>
+</div>
 </body>
 
 </html>
@@ -85,6 +85,27 @@
     Vue.config.keyCodes.f2 = 113
 
 
+    //Vue.directive()自定义全局指令，v-focus
+    //v-指令名称进行调用，例如v-focus,进入页面直接聚焦输入框
+    Vue.directive('focus', {
+        bind(el) {//只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。设置样式相关
+
+        },
+        inserted(el) {//被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。设置行为相关
+            el.focus()
+        },
+        updated(el) {//所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。
+
+        }
+    })
+
+    Vue.directive('color', {
+        bind(el,binding) {//只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
+            el.style.color = binding.value
+        }
+    })
+
+
     let vm = new Vue({
         el: "#app",
         data: {
@@ -92,8 +113,8 @@
             name: '',
             keywords: '',
             list: [
-                { id: 1, name: '奔驰', ctime: new Date() },
-                { id: 2, name: '宝马', ctime: new Date() }
+                {id: 1, name: '奔驰', ctime: new Date()},
+                {id: 2, name: '宝马', ctime: new Date()}
             ]
         },
         methods: {
@@ -105,7 +126,7 @@
                     alert('ID已存在，请重新输入')
                     return false
                 } else {
-                    this.list.push({ id: this.id, name: this.name, ctime: new Date() })
+                    this.list.push({id: this.id, name: this.name, ctime: new Date()})
                     this.id = this.name = ''
                 }
 
@@ -143,9 +164,7 @@
         data: {
             dt: new Date()
         },
-        methods: {
-
-        },
+        methods: {},
         filters: {
             dataFormat: function (dateStr, pattern = '') {
                 let dt = new Date(dateStr)
