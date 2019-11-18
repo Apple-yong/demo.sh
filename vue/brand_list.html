@@ -14,7 +14,7 @@
 
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title" v-fontweight="100">添加品牌</h3>
+            <h3 class="panel-title" v-fontweight="600" v-fontsize="60">添加品牌</h3>
         </div>
         <div class="panel-body form-inline">
             <label>
@@ -160,6 +160,9 @@
                 bind(el, binding) {
                     el.style.fontWeight = binding.value
                 }
+            },
+            'fontsize': function (el, binding) {
+                el.style.fontSize = parseInt(binding.value) + 'px'
             }
 
         }
