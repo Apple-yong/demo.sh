@@ -23,7 +23,7 @@
                 </label>
                 <label>
                     Name:
-                    <input type="text" v-model="name" class="form-control">
+                    <input type="text" v-model="name" class="form-control" @keyup.f2="add">
                 </label>
                 <input type="button" value="添加" class="btn btn-primary" @click="add()">
                 <label>
@@ -81,8 +81,11 @@
         }
     })
 
+    //自定义全局按键修饰符
+    Vue.config.keyCodes.f2 = 113
 
-    var vm = new Vue({
+
+    let vm = new Vue({
         el: "#app",
         data: {
             id: '',
@@ -135,7 +138,7 @@
 
 
     //私有过滤器，两个过滤器名称相同，默认用私有过滤器
-    var vm2 = new Vue({
+    let vm2 = new Vue({
         el: "#app2",
         data: {
             dt: new Date()
