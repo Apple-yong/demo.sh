@@ -14,7 +14,7 @@
 
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">添加品牌</h3>
+            <h3 class="panel-title" v-fontweight="100">添加品牌</h3>
         </div>
         <div class="panel-body form-inline">
             <label>
@@ -100,7 +100,7 @@
     })
 
     Vue.directive('color', {
-        bind(el,binding) {//只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
+        bind(el, binding) {//只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。
             el.style.color = binding.value
         }
     })
@@ -154,6 +154,14 @@
                     }
                 })
             }
+        },
+        directives: {//自定义私有指令
+            'fontweight': {
+                bind(el, binding) {
+                    el.style.fontWeight = binding.value
+                }
+            }
+
         }
     })
 
