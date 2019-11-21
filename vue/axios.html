@@ -9,39 +9,37 @@
 <div id="app">
     <input type="text" v-model="cityname">
     <input type="button" value="POST" @click="postIfo">
+    <div v-for="(item,index) in list" :key="index">
+        {{ item.date }}{{ item.week }} 的天气为 {{ item.weather }}
+    </div>
 </div>
 </body>
 </html>
 <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
 <script>
-    const instance = axios.create({
-        timeout: 1000,
-        headers: ("Access-Control-Allow-Origin", "*")
-    });
     let vm = new Vue({
         el: '#app',
         data: {
             appKey: "eb66156e0e28f824977638c208ad01f1",
-            cityname: ""
+            cityname: "",
+            list: []
         },
         methods: {
             postIfo() {
                 axios.get('http://v.juhe.cn/weather/index', {
-                    headers: {
-                        "Access-Control-Allow-Origin": "*"
-                },
                     params: {
                         cityname: this.cityname,
                         key: this.appKey
                     }
                 })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
-                });
+                    .then(response => {
+                        this.list = response.data.result.future
+                        console.log(this.list)
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
             }
         }
     })
