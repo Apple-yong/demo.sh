@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>品牌列表-使用axios对接真实数据</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+</head>
+
+<body>
+<div id="app">
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">添加品牌</h3>
+        </div>
+        <div class="panel-body form-inline">
+            <label>
+                Name:
+                <input type="text" v-model="name" class="form-control" v-focus>
+            </label>
+            <input type="button" value="添加" class="btn btn-primary" @click="add()">
+            <label>
+                搜索关键词：
+                <input type="text" v-model="keywords" class="form-control">
+            </label>
+        </div>
+    </div>
+
+
+    <table class="table table-hover table-striped">
+        <thead>
+        <tr>
+            <th>Id</th>
+            <th>Name</th>
+            <th>Ctime</th>
+            <th>Operation</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="item in search(keywords)" :key="item.id">
+            <td>{{ item.id }}</td>
+            <td>{{ item.name }}</td>
+            <td>{{ item.ctime | dataFormat('') }}</td>
+            <td><a href="" @click.prevent="del(item.id)">删除</a></td>
+        </tr>
+        </tbody>
+    </table>
+    <h2>{{ dt | dataFormat('') }}</h2>
+</div>
+</body>
+
+</html>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+<script src="https://cdn.bootcss.com/qs/6.5.1/qs.min.js"></script>
+<script>
+    //全局过滤器
+    Vue.filter('dataFormat', function (dateStr, pattern = '') {
+        let dt = new Date(dateStr)
+        let y = dt.getFullYear()
+        let m = (dt.getMonth() + 1).toString().padStart(2, '0')
+        let d = dt.getDate().toString().padStart(2, '0')
+        if (pattern.toLowerCase() === 'yyyy-mm-dd') {
+            return `${y}-${m}-${d}`
+        } else {
+            let hh = dt.getHours().toString().padStart(2, '0')
+            let mm = dt.getMinutes().toString().padStart(2, '0')
+            let ss = dt.getSeconds().toString().padStart(2, '0')
+            // return `${y}-${m < 10 ? ('0' + m) : m}-${d < 10 ? ('0' + d) : d}
+            // ${hh < 10 ? ('0' + hh) : hh}:${mm < 10 ? ('0' + mm) : mm}:${ss < 10 ? ('0' + ss) : ss}`
+            return `${y}-${m}-${d} ${hh}:${mm}:${ss}`
+        }
+    })
+
+
+    //Vue.directive()自定义全局指令，v-focus
+    //v-指令名称进行调用，例如v-focus,进入页面直接聚焦输入框
+    Vue.directive('focus', {
+        bind(el) {//只调用一次，指令第一次绑定到元素时调用。在这里可以进行一次性的初始化设置。设置样式相关
+
+        },
+        inserted(el) {//被绑定元素插入父节点时调用 (仅保证父节点存在，但不一定已被插入文档中)。设置行为相关
+            el.focus()
+        },
+        updated(el) {//所在组件的 VNode 更新时调用，但是可能发生在其子 VNode 更新之前。指令的值可能发生了改变，也可能没有。
+
+        }
+    })
+
+    const instance = axios.create({
+        baseURL: 'http://www.liulongbin.top:3005',
+        timeout: 1000,
+        headers: {'Content-Type': 'application/x-www-form-urlencoded'}
+    });
+
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            id: '',
+            name: '',
+            keywords: '',
+            dt: new Date(),
+            list: [
+                {id: 1, name: '奔驰', ctime: new Date()},
+                {id: 2, name: '宝马', ctime: new Date()}
+            ]
+        },
+        created() {
+            this.getList()
+        },
+        methods: {
+            add() {
+                instance.post('api/addproduct', Qs.stringify({name: this.name}))
+                    .then(res => {
+                        if (res.status === 200) {
+                            // 重新刷新一下列表数据
+                            this.getList()
+                        }
+                    })
+            },
+            getList() {
+                instance.get('api/getprodlist')
+                    .then(response => {
+                        this.list = response.data.message
+                        //console.log(this.list)
+                    })
+                    .catch(error => {
+                        console.log(error);
+                    });
+            },
+            del(id) {
+                instance.get('api/delproduct/'+id)
+                    .then(res => {
+                        console.log(res)
+                        if (res.status===200) {
+                            // 重新刷新一下列表数据
+                            this.getList()
+                        }else{
+                            alert('删除失败')
+                        }
+                    })
+            },
+            search(keywords) {
+                // let newList = []
+                // this.list.forEach(item =>{
+                //     if(item.name.indexOf(keywords) != -1){
+                //         newList.push(item)
+                //     }
+                // })
+                // return newList
+                return this.list.filter(item => {
+                    // 包含某个字符
+                    if (item.name.includes(keywords)) {
+                        return item
+                    }
+                })
+
+
+            }
+        },
+
+    })
+</script>
