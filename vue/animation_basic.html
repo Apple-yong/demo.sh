@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Vue动画</title>
+    <link href="https://cdn.bootcss.com/animate.css/3.7.2/animate.min.css" rel="stylesheet">
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: all 0.4s ease;
+        }
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */ {
+            opacity: 0;
+        }
+        /* 可以设置不同的进入和离开动画 */
+        /* 设置持续时间和动画函数 */
+        .slide-fade-enter-active {
+            transition: all .3s ease;
+        }
+        .slide-fade-leave-active {
+            transition: all .3s cubic-bezier(1.0, 0.5, 0.8, 1.0);
+        }
+        .slide-fade-enter, .slide-fade-leave-to
+            /* .slide-fade-leave-active for below version 2.1.8 */ {
+            transform: translateX(10px);
+            opacity: 0;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <button @click="show = !show">
+            Toggle
+        </button>
+        <transition name="fade">
+            <p v-if="show">hello</p>
+        </transition>
+        <br>
+
+        <button @click="shyt = !shyt">
+            Toggle render
+        </button>
+        <transition name="slide-fade">
+            <p v-if="shyt">hello</p>
+        </transition>
+        <br>
+
+        <button @click="anima = !anima">
+            使用animate.css
+        </button>
+        <transition enter-active-class="animated slideInUp"
+                    leave-active-class="animated slideOutUp"
+                    :duration="{enter:400, leave:400}">
+            <h3 v-if="anima">This is a h3</h3>
+        </transition>
+    </div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    let vm = new Vue({
+        el: '#app',
+        data: {
+            show: true,
+            shyt: true,
+            anima: true
+        },
+        methods: {
+
+        }
+    })
+
+</script>
