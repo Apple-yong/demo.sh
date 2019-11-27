@@ -7,6 +7,17 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>品牌列表-使用axios对接真实数据</title>
     <link href="https://cdn.bootcss.com/twitter-bootstrap/3.3.7/css/bootstrap.css" rel="stylesheet">
+    <style>
+        .fade-enter-active, .fade-leave-active {
+            transition: all 0.6s ease;
+        }
+
+        .fade-enter, .fade-leave-to /* .fade-leave-active below version 2.1.8 */
+        {
+            opacity: 0;
+            transform: translateY(80px);
+        }
+    </style>
 </head>
 
 <body>
@@ -39,13 +50,13 @@
             <th>Operation</th>
         </tr>
         </thead>
-        <tbody>
-        <tr v-for="item in search(keywords)" :key="item.id">
-            <td>{{ item.id }}</td>
-            <td>{{ item.name }}</td>
-            <td>{{ item.ctime | dataFormat('') }}</td>
-            <td><a href="" @click.prevent="del(item.id)">删除</a></td>
-        </tr>
+        <tbody is="transition-group" name="fade">
+            <tr v-for="item in search(keywords)" :key="item.id">
+                <td>{{ item.id }}</td>
+                <td>{{ item.name }}</td>
+                <td>{{ item.ctime | dataFormat('') }}</td>
+                <td><a href="" @click.prevent="del(item.id)">删除</a></td>
+            </tr>
         </tbody>
     </table>
     <h2>{{ dt | dataFormat('') }}</h2>
@@ -103,10 +114,7 @@
             name: '',
             keywords: '',
             dt: new Date(),
-            list: [
-                {id: 1, name: '奔驰', ctime: new Date()},
-                {id: 2, name: '宝马', ctime: new Date()}
-            ]
+            list: []
         },
         created() {
             this.getList()
@@ -132,13 +140,12 @@
                     });
             },
             del(id) {
-                instance.get('api/delproduct/'+id)
+                instance.get('api/delproduct/' + id)
                     .then(res => {
-                        console.log(res)
-                        if (res.status===200) {
+                        if (res.status === 200) {
                             // 重新刷新一下列表数据
                             this.getList()
-                        }else{
+                        } else {
                             alert('删除失败')
                         }
                     })
