@@ -5,12 +5,39 @@
     <title>Vue组件</title>
 </head>
 <body>
+    <div id="app">
+        <button-counter></button-counter>
+        <my-Com1></my-Com1>
+    </div>
 
+    <template id="teml1">
+        <h3>4325435</h3>
+    </template>
 </body>
 </html>
 <script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
 <script>
+
+
+
+    // 第一种方式定义组件
+    Vue.component('buttonCounter', {
+        data: function () {
+            return {
+                count: 0
+            }
+        },
+        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+    })
+    // 第二种方式定义组件
+    Vue.component('myCom1', {
+        template: '#teml1'
+    })
+
+
     let vm = new Vue({
+        el:"#app",
+        data:{},
 
     })
 </script>
