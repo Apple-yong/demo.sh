@@ -7,6 +7,7 @@
 <body>
     <div id="app">
         <button-counter></button-counter>
+        <button-counter></button-counter>
         <my-Com1></my-Com1>
         <login></login>
     </div>
@@ -20,15 +21,18 @@
 <script>
 
 
-
     // 第一种方式定义组件
     Vue.component('buttonCounter', {
+        // 组件中的data一定要为方法，一定要返回一个对象
         data: function () {
             return {
                 count: 0
             }
         },
-        template: '<button v-on:click="count++">You clicked me {{ count }} times.</button>'
+        template: ` <div>
+                        <button type="button" @click="count++">点击{{ count }}次</button>
+                        <h3>{{ count }}</h3>
+                    </div> `
     })
     // 第二种方式定义组件
     Vue.component('myCom1', {
@@ -38,8 +42,8 @@
 
     // 私有组件
     let vm = new Vue({
-        el:"#app",
-        data:{},
+        el: "#app",
+        data: {},
         components: {
             login: {
                 template: '#teml1'
