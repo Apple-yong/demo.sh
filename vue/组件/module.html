@@ -8,10 +8,11 @@
     <div id="app">
         <button-counter></button-counter>
         <my-Com1></my-Com1>
+        <login></login>
     </div>
 
     <template id="teml1">
-        <h3>4325435</h3>
+        <h3>432543599</h3>
     </template>
 </body>
 </html>
@@ -35,9 +36,14 @@
     })
 
 
+    // 私有组件
     let vm = new Vue({
         el:"#app",
         data:{},
-
+        components: {
+            login: {
+                template: '#teml1'
+            }
+        }
     })
 </script>
