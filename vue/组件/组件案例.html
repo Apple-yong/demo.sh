@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件案例</title>
+    <link href="https://cdn.bootcss.com/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <comment-box>
+
+        </comment-box>
+        <ul class="list-group">
+            <li class="list-group-item" v-for="item in list" :key="item.id">
+                <span class="badge">评论人:{{ item.user }}</span>
+                {{ item.content }}
+            </li>
+        </ul>
+    </div>
+
+    <template id='temp1' >
+        <div>
+            <div class="form-group">
+                <label>评论人：</label>
+                <input type="text"  class="form-control" v-model="user">
+            </div>
+            <div class="form-group">
+                <label>评论内容：</label>
+                <textarea class="form-control" v-model="content"></textarea>
+            </div>
+            <div class="form-group" >
+                <input type="button" value="发表评论" class="btn btn-primary" @click="postComment">
+            </div>
+        </div>
+    </template>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    var commentBox = {
+        data(){
+          return {
+              user: '',
+              content: ''
+          }
+        },
+        template: '#temp1',
+        methods: {
+            postComment(){
+
+            }
+        }
+    }
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            list: [
+                {id: 1, user:'李白', content: '天生我才必有用'},
+                {id: 2, user:'林则徐', content:'岂因祸福避趋之'},
+                {id: 3, user:'蛤', content:'苟利国家生死以'}
+            ]
+        },
+        methods: {
+
+        },
+        components: {
+            'comment-box':commentBox
+        }
+    })
+</script>
