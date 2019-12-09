@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>组件切换</title>
+</head>
+<body>
+    <div id="app">
+        <com2 @func="show"></com2>
+    </div>
+    <template id="tem1">
+        <div>
+            <h1>子组件</h1>
+            <input type="button" @click="myclick" value="这个是子组件的按钮，点击它，触发父组件传过来的func方法 ">
+        </div>
+    </template>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script>
+    let com2 = {
+        template: '#tem1',
+        methods: {
+            myclick(){
+                //$emit触发
+                this.$emit('func', this.sonmsg)
+            }
+        },
+        data(){
+            return {
+                sonmsg: {
+                    name: 'aaa',
+                    age: 6
+                }
+            }
+        }
+    }
+    let vm = new Vue({
+        el: "#app",
+        data: {
+            msg: '父组件值123'
+        },
+        methods: {
+            show(data){
+                console.log(data)
+                this.msg = data
+            }
+        },
+        components: {
+            com2
+        }
+    })
+</script>
