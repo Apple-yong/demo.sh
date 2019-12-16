@@ -47,7 +47,13 @@
         template: '#temp1',
         methods: {
             postComment(){
-
+                let comment = {id: Date.now(), user: this.user, content: this.content}
+                // 从localStorage获取所有的评论
+                let lists = JSON.parse(localStorage.getItem('cmts' || '[]'))
+                console.log(lists)
+                lists.push(comment)
+                localStorage.setItem('cmts', JSON.stringify(lists))
+                this.user = this.content = ''
             }
         }
     }
