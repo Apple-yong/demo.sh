@@ -32,7 +32,8 @@
     let register = {
         template: '<h1>注册</h1>'
     }
-    let routerObj = new VueRouter({
+
+    const router = new VueRouter({
         routes: [
             // 重定向首页默认展示登录
             {path: '/', redirect: '/login'},
@@ -40,7 +41,6 @@
             {path: '/register', component: register}
         ]
     })
-
     let vm = new Vue({
         el: "#app",
         data: {
@@ -48,6 +48,6 @@
         },
         methods: {
         },
-        router: routerObj //将路由规则对象，注册到vm实例上。用来监听URL地址的变化，展示对应的组件
+        router //将路由规则对象，注册到vm实例上。用来监听URL地址的变化，展示对应的组件
     })
 </script>
