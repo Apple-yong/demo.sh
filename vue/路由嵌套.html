@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>router路由嵌套</title>
+</head>
+<style>
+    .router-link-active{
+        color: red;
+    }
+</style>
+<body>
+    <div id="app">
+        <router-link to='/account'>Account</router-link>
+        <router-view></router-view>
+    </div>
+    <template id="tmp1">
+        <div>
+            <h1>这是Account组件</h1>
+            <router-link to="/account/login">登录</router-link>
+            <router-link to="/account/register">注册</router-link>
+            <router-view></router-view>
+        </div>
+    </template>
+</body>
+
+</html>
+<script src="https://cdn.bootcss.com/vue/2.6.10/vue.js"></script>
+<script src="https://cdn.bootcss.com/vue-router/3.1.3/vue-router.min.js"></script>
+<script>
+    let account = {
+        template: '#tmp1'
+    }
+
+    let login = {
+        template: '<h3>登录</h3>'
+    }
+
+    let register = {
+        template: '<h3>注册</h3>'
+    }
+
+    const router = new VueRouter({
+        routes: [
+            {
+                path: '/account',
+                component: account,
+                // 子路由
+                children:[
+                    { path:'login', component: login },
+                    { path:'register', component: register }
+                ]
+
+            },
+            // { path: '/account/login', component: login},
+            // { path: '/account/register', component: register}
+        ]
+    })
+
+    let vm = new Vue({
+        el: "#app",
+        data: {
+
+        },
+        methods: {
+
+        },
+        router: router
+    })
+</script>
