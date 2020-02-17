@@ -2,7 +2,7 @@
 
 import $ from 'jquery'
 $(function () {
-    $('li:odd').css('backgroundColor', 'blue')
+    $('li:odd').css('backgroundColor', 'black')
     $('li:even').css('backgroundColor', function () {
         return '#' + 'D97634'
     })
