@@ -18,9 +18,10 @@ module.exports = {
     ],
     module: {  //用于配置所有第三方模块加载器
         rules: [
-            { test: /\.css$/, use:['style-loader', 'css-loader'] },  //匹配.css结尾的文件,使用这两个插件处理
-            { test: /\.less$/, use:['style-loader', 'css-loader','less-loader'] },
-            { test: /\.scss$/, use:['style-loader', 'css-loader','sass-loader'] }
+            { test: /\.css$/, use: ['style-loader', 'css-loader'] },  //匹配.css结尾的文件,使用这两个插件处理
+            { test: /\.less$/, use: ['style-loader', 'css-loader','less-loader'] },
+            { test: /\.scss$/, use: ['style-loader', 'css-loader','sass-loader'] },
+            { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: 'url-loader?limit=7632&name=[hash:8]-[name].[ext]' }// 处理图片路径的loader
         ]
     }
 }
