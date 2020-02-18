@@ -22,7 +22,8 @@ module.exports = {
             { test: /\.less$/, use: ['style-loader', 'css-loader','less-loader'] },
             { test: /\.scss$/, use: ['style-loader', 'css-loader','sass-loader'] },
             { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: 'url-loader?limit=7632&name=[hash:8]-[name].[ext]' },// 处理图片路径的loader
-            { test: /\.(ttf|eot|svg|woff|woff2|otf)$/, use: 'url-loader' } //处理字体文件
+            { test: /\.(ttf|eot|svg|woff|woff2|otf)$/, use: 'url-loader' }, //处理字体文件
+            { test: /\.js$/, use: 'babel-loader', exclude: /node_modules/ } //配置babel转换ES6语法
         ]
     }
 }
