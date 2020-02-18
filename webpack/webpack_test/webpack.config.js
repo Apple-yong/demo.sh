@@ -21,7 +21,8 @@ module.exports = {
             { test: /\.css$/, use: ['style-loader', 'css-loader'] },  //匹配.css结尾的文件,使用这两个插件处理
             { test: /\.less$/, use: ['style-loader', 'css-loader','less-loader'] },
             { test: /\.scss$/, use: ['style-loader', 'css-loader','sass-loader'] },
-            { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: 'url-loader?limit=7632&name=[hash:8]-[name].[ext]' }// 处理图片路径的loader
+            { test: /\.(jpg|png|gif|bmp|jpeg)$/, use: 'url-loader?limit=7632&name=[hash:8]-[name].[ext]' },// 处理图片路径的loader
+            { test: /\.(ttf|eot|svg|woff|woff2|otf)$/, use: 'url-loader' } //处理字体文件
         ]
     }
 }
