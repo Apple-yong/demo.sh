@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <meta charset="utf-8">
+  <title>fullpage</title>
+</head>
+
+<body>
+  <div id="app">
+    <fullpage :pages="5" :bg-color="bgColor" base-bgc="">
+      <template slot="slot2" scope="props">
+        <page1 :state="props.state" :page="props.page" :index="props.index"></page1>
+      </template>
+    </fullpage>
+  </div>
+</body>
+
+</html>
