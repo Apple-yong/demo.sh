@@ -19,4 +19,15 @@ const store = new Vuex.Store({
   mutations
 })
 
+// 监听这几个模块，如果发生变化，则进行热重载
+if( module.hot ){
+  module.hot.accept(['./actions.js','./getters.js','./mutations.js'], () => {
+    store.hotUpdate({
+      getters: require('./getters').default,
+      actions: require('./actions').default,
+      mutations: require('./mutations').default
+    })
+  })
+}
+
 export default store
