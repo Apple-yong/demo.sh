@@ -19,4 +19,15 @@ const store = new Vuex.Store({
   mutations
 })
 
+// 热加载
+if (module.hot) {
+  module.hot.accept(['./mutations','./actions.js','./getters.js'], () => {
+    store.hotUpdate({
+      getters: require('./getters').default,
+      actions: require('./actions').default,
+      mutations: require('./mutations').default
+    })
+  })
+}
+
 export default store
