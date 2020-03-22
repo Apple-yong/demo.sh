@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div @click="$store.state.show = !$store.state.show">点击</div>
+    <div @click="$store.state.dialog.show = !$store.state.dialog.show">点击</div>
     <t-son></t-son>
   </div>
   

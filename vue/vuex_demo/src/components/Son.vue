@@ -1,5 +1,5 @@
 <template>
-  <div v-show="$store.state.show">
+  <div v-show="$store.state.dialog.show">
     1111
   </div>
 </template>
