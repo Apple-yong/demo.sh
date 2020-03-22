@@ -1,3 +1,4 @@
+// 这个文件可以管理多个store文件
 import Vue from 'vue'
 import vuex from 'vuex'
 Vue.use(vuex);
