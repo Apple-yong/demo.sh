@@ -12,10 +12,13 @@ new Vue({
 }).$mount('#app')
 router.beforeEach((to, from, next) => {
   var logged_in = false
-  if(!logged_in && to.path == '/user'){
+  if(!logged_in && to.matched.some(function(item){
+    return item.meta.login_required
+  })){
     alert('你没登录')
     next('/')
   }
+    
   else
     next() 
 })

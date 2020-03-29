@@ -19,7 +19,10 @@ const routes = [
     // route level code-splitting
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
-    component: About
+    component: About,
+    meta: {
+      login_required: false   // 要不要判断是否登录
+    }
   },
   {
     path: '/user/:name',
@@ -31,7 +34,11 @@ const routes = [
         name: 'UserMore',
         component: UserMore
       }
-    ]
+    ],
+    meta: {
+      login_required: false   // 要不要判断是否登录
+    }
+
   }
 ]
 
