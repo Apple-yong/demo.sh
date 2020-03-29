@@ -4,6 +4,7 @@
       <router-link to="/">Home</router-link> |
       <router-link to="/about">About</router-link> |
       <router-link to="/user/李大娘?age=20">User</router-link>
+      <button @click="surf">漫游</button>
     </div>
     <router-view/>
   </div>
@@ -31,3 +32,13 @@
   color: #42b983;
 }
 </style>
+
+<script>
+export default {
+  methods: {
+    surf() {
+      this.$router.push('/about')
+    }
+  }
+}
+</script>
