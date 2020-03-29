@@ -28,6 +28,7 @@ const routes = [
     path: '/user/:name',
     name: 'User',
     component: User,
+    props: true,
     children: [
       {
         path: 'usermore',

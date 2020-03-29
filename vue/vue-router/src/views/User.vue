@@ -2,7 +2,7 @@
   <div class="about">
     <!-- 两种传参的方法 -->
     <div v-if="item">
-      <h1><span @click="show">你好，</span>{{ $route.params.name }}</h1>
+      <h1><span @click="show">你好，</span>{{ name }}</h1>
       <h2>你今年 {{ $route.query.age }} 岁了</h2>
     </div>  
     
@@ -23,6 +23,7 @@ export default {
       item: true
     }
   },
+  props: ['name'],
   methods: {
     show(){
       this.item = !this.item
