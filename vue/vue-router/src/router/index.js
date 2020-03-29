@@ -28,7 +28,7 @@ const routes = [
     path: '/user/:name',
     name: 'User',
     component: User,
-    props: true,
+    props: (route) => ({ name: route.query.age }),
     children: [
       {
         path: 'usermore',
