@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<title></title>
+</head>
+<body>
+	<input id="cityname" type="text" name="">
+	<input id="tijiao" type="button" name="提交" value="提交">
+	<div></div>
+</body>
+</html>
+<script src="https://cdn.bootcss.com/jquery/3.3.1/jquery.min.js"></script>
+<script type="text/javascript">
+	var url = "http://v.juhe.cn/weather/index";
+	var key = "eb66156e0e28f824977638c208ad01f1";
+	$("#tijiao").click(function(){
+		var cityname = $("#cityname").val();
+		$.ajax(
+            {
+                url: url,
+                type: "GET",
+                dataType: "JSONP",
+                data: { cityname: cityname, key: key },
+                success: function (result) {
+                    console.log(result);
+                    $("div").html(`
+                    	<li>${cityname}今天天气</li>
+                    	<li>温度：${result.result.today.temperature}</li>
+                    	<li>天气：${result.result.today.weather}</li>
+                    	<li>风向：${result.result.today.wind}</li>
+                    	<li>日期：${result.result.today.date_y}</li>
+                    	`
+                    );
+                },
+            });
+	})
+</script>

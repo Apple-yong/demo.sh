@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8"/>
+
+    <!--css-->
+    <style>
+        body{
+            margin:0;
+        }
+        h1{
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            padding-top: 280px;
+            background: #fff url('http://sqimg.qq.com/qq_product_operations/im/2015/brand.png') no-repeat center top;
+        }
+        .fixed-bg {
+            background-image: url('http://sqimg.qq.com/qq_product_operations/im/2015/fisrtbg.jpg');
+            min-height: 600px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+
+        .fixed-bg2 {
+            background-image: url('http://sqimg.qq.com/qq_product_operations/im/2015/update/avd.jpg');
+            min-height: 600px;
+            background-attachment: fixed;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-size: cover;
+        }
+        .qfigure {
+            width: 100%;
+            height: 584px;
+            background: #fff;
+        }
+        .qw960 {
+            position: relative;
+            width: 960px;
+            height: 584px;
+            margin: 0 auto;
+        }
+        .qcall .txtwrap {
+            position: absolute;
+            right: 7px;
+            top: 115px;
+            width: 487px;
+        }
+        .qcall h2 {
+            width: 100%;
+            height: 0;
+            overflow: hidden;
+            padding-top: 135px;
+            background: transparent url('http://sqimg.qq.com/qq_product_operations/im/2015/qcall_txt.png') no-repeat 0 0;
+        }
+        .qcall p {
+            width: 100%;
+            margin-bottom: 12px;
+            line-height: 25px;
+            text-align: right;
+            opacity: 0.6;
+        }
+        .qcall .figs {
+            background: transparent url('https://sqimg.qq.com/qq_product_operations/im/2015/qcall_figs.png') no-repeat 190px 41px;
+        }
+        .figs {
+            width: 100%;
+            padding-top: 44px;
+            min-height: 77px;
+        }
+        .qcall .figs li {
+            float: right;
+            border-left: 1px solid #e9e9e9;
+        }
+        .figs li {
+            padding: 58px 0 0;
+            color: #a0a0a0;
+            font-size: 14px;
+            text-align: center;
+        }
+        ul, ol, li {
+            list-style: none;
+        }
+        .qcall .figs li.f01 {
+            width: 80px;
+            text-align: right;
+        }
+        .qcall .figs li.f02 {
+            width: 109px;
+        }
+        .qcall .figs li.f03 {
+            width: 156px;
+            border: none;
+        }
+        .qcallAnimate {
+            position: absolute;
+            left: -32px;
+            bottom: 0;
+            width: 664px;
+            height: 763px;
+            background: transparent url('http://sqimg.qq.com/qq_product_operations/im/2015/update/pic1.png') no-repeat 0 0;
+        }
+        a.knmore:link, a.knmore:visited {
+            color: #12b7f5;
+            text-decoration: none;
+        }
+        .txtwrap p {
+            font-size: 18px;
+            letter-spacing: 0.12em;
+        }
+    </style>
+</head>
+<body>
+<!--不带图-->
+<div>
+    <h1></h1>
+    <!--带图-->
+    <div class="fixed-bg">这是已经带图的，可以在css里面设置图片的属性</div>
+    <!--不带图-->
+    <div class="qfigure qcall">
+        <div class="qw960">
+            <div class="txtwrap">
+                <h2>沟通，是跨越千山万水的亲切声音</h2>
+                <p>无论何时何地，你都能自由享受QQ在各类终端<br>上带来的高清通话，与好友一起想聊多久聊多久</p>
+                <p><a class="knmore" href="https://im.qq.com/album/v/" target="_blank" pgv="im.index2015.more_1">了解更多 &gt;</a></p>
+                <ul class="figs">
+                    <li class="f01">屏幕分享</li>
+                    <li class="f02">群组通话</li>
+                    <li class="f03">两人、多人通话</li>
+                </ul>
+            </div>
+            <div class="qcallAnimate">
+            </div>
+        </div>
+    </div>
+    <!--带图-->
+    <div class="fixed-bg2">这是已经带图的，可以在css里面设置图片的属性</div>
+    <p style="height: 800px">这是没有带图的背景</p>
+</div>
+
+</body>
+</html>
