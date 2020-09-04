@@ -65,15 +65,14 @@ gulp.task('images', function() {
 
 
 //js压缩
-gulp.task('script', done => {
-    // 1\. 找到文件
-    gulp.src(paths.jsSrc.input)
+gulp.task('script', function() {
+    return gulp.src(paths.jsSrc.input)
         // 2\. 压缩文件
         .pipe(uglify())
-        // 3\. 另存压缩后的文件
         .pipe(gulp.dest(paths.jsSrc.output))
-    done()
-})
+});
+
+
 
 //浏览器同步
 // gulp.task('browser-sync', function() { //默认地址localhost:3000，默认打开
