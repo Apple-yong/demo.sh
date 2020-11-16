@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>圣杯布局</title>
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <link rel="stylesheet" href="../common/css/clearfix.css">
+    <style>
+        #header,
+        #footer {
+            height: 50px;
+            background-color: aquamarine;
+        }
+
+        #container {
+            padding-left: 200px;
+            padding-right: 150px;
+        }
+
+        .col {
+            float: left;
+            min-height: 100px;
+        }
+
+        #left {
+            background-color: blue;
+            width: 200px;
+            margin-left: -100%;
+            position: relative;
+            right: 200px;
+        }
+
+        #right {
+            background-color: brown;
+            width: 150px;
+            margin-right: -150px;
+        }
+
+        #center {
+            width: 100%;
+            background-color: violet;
+        }
+
+    </style>
+</head>
+
+<body>
+    <header id="header"></header>
+    <div id="container" class="clearfix">
+        <div id="center" class="col"></div>
+        <div id="left" class="col"></div>
+        <div id="right" class="col"></div>
+    </div>
+    <footer id="footer" class="clearfix"></footer>
+</body>
+
+</html>
