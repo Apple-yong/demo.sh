@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>相对定位和绝对定位</title>
+    <link rel="stylesheet" href="common/css/reset.css">
+    <link rel="stylesheet" href="common/css/clearfix.css">
+    <style>
+        .container{
+            width: 500px;
+            height: 300px;
+            margin: 100px;
+            border: 1px solid red; 
+            position: relative;  /*相对于自己目前的位置进行定位，用top、left、right、bottom进行定位*/
+            top: 50px;
+            left: 50px; /*偏移过多会造成与其他div重叠*/
+        }
+        .box{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            position: absolute;   /*相对于父级非static定位的元素进行定位，这里就是相对于container进行定位*/
+            top:50px;
+            left: 50px;
+        }
+        .minibox{
+            width: 20px;
+            height: 20px;
+            border: 1px solid blue;
+            position: absolute;  /*这里相对于box进行定位*/
+            top:20px;
+            left: 20px;
+        }
+
+        .container1{
+            width: 500px;
+            height: 300px;
+            border: 1px solid red;
+            background-color: aquamarine;
+            position: relative;
+            
+        }
+        .box1{
+            width: 100px;
+            height: 100px;
+            border: 1px solid black;
+            position: absolute;
+            top:50px;
+            left: 50px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container clearfix">
+        <div class="box">
+            <div class="minibox">
+            
+            </div>
+        </div>
+    </div>
+
+    <div class="container1 clearfix">
+        <div class="box1">
+
+        </div>
+    </div>
+</body>
+</html>
