@@ -78,7 +78,8 @@
   margin-left: 30px;
 }
 
-.content .boxlist .box:nth-child(4) .item:nth-child(3), .content .boxlist .box:nth-child(4) .item:nth-child(4) {
+.content .boxlist .box:nth-child(4) .item:nth-child(3),
+.content .boxlist .box:nth-child(4) .item:nth-child(4) {
   margin-top: 85px;
 }
 
