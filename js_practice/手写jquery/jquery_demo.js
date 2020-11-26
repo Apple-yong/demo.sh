@@ -147,3 +147,51 @@ async function fn1() {
         console.log(error);
     }
 })()
+
+
+// async/await执行顺序案例
+// 案例1
+async function async1() {  
+    console.log('async start');// 2.1 打印
+    await async2()   //3、执行
+    console.log('async1 end');  // 5、打印
+}
+
+async function async2() {  
+    console.log('async2');// 3.1 打印
+}
+
+console.log('script start'); // 1、执行并打印
+async1() // 2、执行
+console.log('script end'); //4、打印
+
+
+// 案例2
+async function async1() {  
+    console.log('async1 start');
+    await async2()   
+    console.log('async1 end');  
+    await async3()   
+    console.log('async1 end 2');  
+}
+
+async function async2() {  
+    console.log('async2');
+}
+
+async function async3() {  
+    console.log('async3');
+}
+
+console.log('script start'); 
+async1() 
+console.log('script end'); 
+
+
+//script start
+//async1 start
+//async2
+//script end
+//async1 end
+//async3
+//async1 end 2
