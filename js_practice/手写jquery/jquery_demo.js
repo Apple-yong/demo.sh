@@ -220,3 +220,72 @@ nums.forEach(async (i) => {
         console.log(result);
     }
 })()
+
+
+// 宏任务与微任务
+console.log(100)
+setTimeout(() => {
+    console.log(200);   
+}); // 宏任务
+Promise.resolve().then(() =>{
+    console.log(300);
+}) // 微任务
+console.log(400);
+
+// 综合题目
+async function async1() {  
+    console.log('async1 start');// 3.1 输出
+    await async2()   // 4 执行
+    console.log('async1 end');// 5 异步  微任务1
+}
+
+async function async2() {  
+    console.log('async2'); // 4.1 输出
+}
+
+console.log('script start');  // 1、输出
+
+setTimeout(() => {  // 2、执行，异步，宏任务1
+    console.log('setTimeout');
+}, 0);
+
+async1()  // 3、执行
+
+// 初始化Promise，传入的函数会立刻执行
+new Promise((resolve, reject) => {  
+    console.log('promise1'); // 6、输出
+    resolve()   // 异步 微任务2
+}).then(() =>{
+    console.log('promise2');
+})
+console.log('script end');// 7、输出，同步执行完毕，异步先执行微任务，再执行宏任务
+
+//script start
+//async1 start
+//async2
+//promise1
+//script end
+//async1 end
+//promise2
+//setTimeout
+
+
+// DOM插入性能优化
+const listNode = document.getElementById('list')
+// 插入一个文档片段，此时还没有插入到DOM书中
+const frag = document.createDocumentFragment()
+// 执行插入
+for (let x = 0; x < 10; x++) {
+    const li = document.createElement("li")
+    li.innerHTML = "List item" + x
+    frag.appendChild(li)
+}
+// 都完成后，最后插入到DOM树中
+listNode.appendChild(frag)
+
+// 对DOM查询做缓存
+const pList = document.getElementsByTagName("p")
+const pLength = pList.length
+for (let i = 0; i < pLength; i++) {
+    // 缓存length ,只进行一次DOM查询 
+}
