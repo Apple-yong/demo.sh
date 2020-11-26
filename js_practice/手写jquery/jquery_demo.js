@@ -195,3 +195,28 @@ console.log('script end');
 //async1 end
 //async3
 //async1 end 2
+
+
+// for of异步遍历
+function muti(num) {  
+    return new Promise((resolve, reject) => {
+        setTimeout(() => {
+            resolve(num * num)
+        }, 1000);
+    });
+}
+const nums = [1, 2, 3];
+
+// forEach遍历，没有延迟
+nums.forEach(async (i) => {
+    const result = await muti(i)
+    console.log(result);
+});
+
+// for of异步遍历，有延迟
+(async function () {  
+    for (const i of nums) {
+        const result = await muti(i)
+        console.log(result);
+    }
+})()
