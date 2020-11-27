@@ -292,8 +292,9 @@ for (let i = 0; i < pLength; i++) {
 
 
 
-// 事件绑定
+// 通用事件监听事件
 function bindEvent(elem, type, selector, fn) {  
+    // 如果传了三个参数
     if(fn == null){
         fn = selector
         selector = null
