@@ -5,9 +5,13 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>圣杯布局</title>
-    <link rel="stylesheet" href="../common/css/reset.css">
-    <link rel="stylesheet" href="../common/css/clearfix.css">
+    <link rel="stylesheet" href="common/css/reset.css">
+    <link rel="stylesheet" href="common/css/clearfix.css">
     <style>
+        body {
+            min-width: 550px;
+        }
+
         #header,
         #footer {
             height: 50px;
@@ -42,18 +46,17 @@
             width: 100%;
             background-color: violet;
         }
-
     </style>
 </head>
 
 <body>
-    <header id="header" class="clearfix"></header>
+    <header id="header" class="clearfix">this is header</header>
     <div id="container" class="clearfix">
         <div id="center" class="col">this is center</div>
         <div id="left" class="col">this is left</div>
         <div id="right" class="col">this is right</div>
     </div>
-    <footer id="footer" class="clearfix"></footer>
+    <footer id="footer" class="clearfix">this is footer</footer>
 </body>
 
 </html>

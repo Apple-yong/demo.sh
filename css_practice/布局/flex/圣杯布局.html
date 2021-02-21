@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>双飞翼布局</title>
+    <link rel="stylesheet" href="../common/css/reset.css">
+    <link rel="stylesheet" href="../common/css/clearfix.css">
+    <style>
+        #header,
+        #footer {
+            height: 50px;
+            background-color: aquamarine;
+        }
+
+        #container {
+            height: 50px;
+            display: flex;
+        }
+
+        #center {
+            flex: 1;
+        }
+
+        #left {
+            background-color: rgb(150, 66, 39);
+            /* flex-grow项目的放大比例  flex-shrink项目的缩小比例  flex-basis项目占据的主轴空间 */
+            flex: 0 0 200px;  
+            /* 排序  */
+            order: -1;
+        }
+
+        #right {
+            background-color: blueviolet;
+            flex: 0 0 150px;
+        }
+    </style>
+</head>
+
+<body>
+    <header id="header" class="clearfix">this is header</header>
+    <div id="container" class="clearfix">
+        <div id="left" class="col">this is left</div>
+        <div id="center">this is center</div>
+        <div id="right" class="col">this is right</div>
+    </div>
+    <footer id="footer" class="clearfix">this is footer</footer>
+</body>
+
+</html>
