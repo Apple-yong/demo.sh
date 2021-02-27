@@ -7,32 +7,33 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>冒泡</title>
 </head>
+<style>
+</style>
 
 <body>
-    <div id="ev">点击</div>
+    <div id="ev">
+        <button id="ev2">点击</button>
+    </div>
 </body>
 
 </html>
 <script>
     var ev = document.getElementById('ev')
-
-    window.addEventListener('click', function () {
-        console.log('windown')
-    }, false) //false是捕获，false是冒泡
-
-    document.addEventListener('click', function () {
-        console.log('document')
-    }, false)
-
-    document.documentElement.addEventListener('click', function () {
-        console.log('html')
-    }, false)
-
-    document.body.addEventListener('click', function () {
-        console.log('body')
-    }, false)
-
     ev.addEventListener('click', function () {
         console.log('ev')
     }, false)
+    ev2.addEventListener('click', function () {
+        preventBubble()
+        console.log('ev2')
+    }, false)
+
+    // 阻止事件冒泡
+    function preventBubble(event) {
+        var e = arguments.callee.caller.arguments[0] || event; //若省略此句，下面的e改为event，IE运行可以，但是其他浏览器就不兼容
+        if (e && e.stopPropagation) {
+            e.stopPropagation();
+        } else if (window.event) {
+            window.event.cancelBubble = true;
+        }
+    }
 </script>
