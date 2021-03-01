@@ -1,16 +1,21 @@
 <template>
   <div id="app">
-    <Father/>
+    <Index/>
   </div>
 </template>
 
 <script>
-import Father from './components/Father'
+import Index from './components/fatherAndSon/index'
 
 export default {
   name: 'App',
+  data() {
+      return {
+          name: 'APP'
+      }
+  },
   components: {
-    Father
+    Index
   }
 }
 </script>
