@@ -46,5 +46,9 @@ export default {
         console.log(this.$root.$children[0].$children[0].paper) // 第一个父组件，这里是自己
         console.log(this.$root.$children[0].$children[0].$children[0].clips)// 第一个子组件，这里是item
     },
+    beforeDestroy() {
+        // 及时销毁，否则可能造成内存泄露
+        event.$off('data-a', this.title)
+    }
 }
 </script>

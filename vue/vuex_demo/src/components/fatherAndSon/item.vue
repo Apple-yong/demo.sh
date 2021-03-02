@@ -35,5 +35,9 @@ export default {
             this.title = title; //箭头函数内部不会产生新的this，这边如果不用=>,this指代Event
         });
     },
+    beforeDestroy() {
+        // 及时销毁，否则可能造成内存泄露
+        event.$off('data-a', this.title)
+    }
 };
 </script>
