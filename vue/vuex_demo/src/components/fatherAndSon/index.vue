@@ -1,5 +1,7 @@
 <template>
     <div>
+        <ItemB @click="getSonString" />
+        <ItemC @click="getSonString" />
         <item @click="getSonString" v-bind:users="users" ref="item"/>
         <div>{{ title }}</div>
     </div>
@@ -7,16 +9,21 @@
 
 <script>
 import Item from './item'
+import ItemB from './itemB'
+import ItemC from './itemC'
+import event from './event'
 export default {
     data() {
         return {
-            title: '',
+            title: '父组件自己的值',
             users:['lee', 'he', 'mei'],
             paper: '父组件的一个值',
         }
     },
     components: {
-        Item
+        Item,
+        ItemB,
+        ItemC
     },
     methods: {
         getSonString(title) {
@@ -24,6 +31,10 @@ export default {
         }
     },
     mounted() {
+        event.$on("data-a", (title) => {
+            this.title = title; //箭头函数内部不会产生新的this，这边如果不用=>,this指代Event
+        });
+
         // 读取第一个子组件数据，不推荐，你并不知道哪个是第一个
         console.log(this.$children[0].clips)
 
