@@ -6,6 +6,7 @@
     <!-- 父组件获取子组件的值 -->
     <t-son @func="getMsgFormSon"></t-son>
     <div>{{ sonData }}</div>
+    <div>{{ $store.state.dialog.name }}</div>
   </div>
   
 </template>

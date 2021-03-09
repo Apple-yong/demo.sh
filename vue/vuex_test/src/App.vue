@@ -1,21 +1,17 @@
 <template>
   <div id="app">
-    <Index/>
+    <HelloWorld/>
+    <p>{{ $store.state.name }}</p>
   </div>
 </template>
 
 <script>
-import Index from './components/Father'
+import HelloWorld from './components/HelloWorld.vue'
 
 export default {
   name: 'App',
-  data() {
-      return {
-          name: 'APP'
-      }
-  },
   components: {
-    Index
+    HelloWorld
   }
 }
 </script>

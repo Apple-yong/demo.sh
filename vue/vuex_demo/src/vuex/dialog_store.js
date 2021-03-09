@@ -1,6 +1,7 @@
 export default {
   state:{
-      show:false
+      show:false,
+      name:'你爸爸吧'
   },
   // 类似于computed计算属性
   getters:{
